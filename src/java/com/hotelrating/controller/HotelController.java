@@ -66,6 +66,6 @@ public class HotelController
     {
         model.addAttribute("hotel", this.hotelService.getHotelById(id)) ;
         model.addAttribute("listHotels", this.hotelService.listHotels()) ;
-        return "hotels" ;
+        return "hotel" ;
     }
 }
