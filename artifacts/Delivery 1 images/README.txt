@@ -1,7 +1,8 @@
 <<WILL BE UPDATED>>
-Below just a concept. If I fail to find a free workable template, then materialise this concept.
 
 For OVERALL design elements & color, I'd prefer a flat design cos it's trendy & the color palette given is easy to the eyes.
+The ALL CAPITALISED FONT - Bebas Neue
+The other font - Archivo narrow
 Refer to "Flatly" image. The link below is the free Bootstrap template
 - https://bootswatch.com/flatly
 
@@ -13,7 +14,6 @@ at the top navigation bar, there will be (in sequence)
 "HOME" icon/link, "Dashboard" icon/link, "sign in/login" icon/link.
 
 At the center of the page, there will be a "search" option 
-*PS: just take the "hotels" tab only.
 *PS: the link below is the website of the image.
 - https://www.templatemonster.com/demo/61270.html
 >>
@@ -21,7 +21,7 @@ At the center of the page, there will be a "search" option
 
 <<
 For "search result" page, please refer to "Result" image.
-Is it too complicated? I can't decide what element to eliminate.
+Displays a result of the searching, the 'View Hotel' icon is a button that is hyperlinked to "Hotel" page
 *PS: the link below is the website of the image, please search to view the result page
 - trivago.com
 >>
@@ -37,12 +37,14 @@ Just take login/signup by email.
 
 <I don't know if we need this page, if needed, do notify me>
 For "userprofile" page, please refer to "User Profile" image.
+Display user details and his/her recent activity
 >>
 
 
 <<
-For "Hotel" page, please refer to "Hotel" image.
-Is it too complicated? I can't decide what element to eliminate.
+For "Hotel" page, please refer to "Hotel1" & "Hotel2" image.
+For "Hotel1" image, it is a top portion of the page which displays the individual Hotel's details
+For "Hotel2" image, it is a bottom portion of the page which displays the form where user can input their experience and the Blue Rectangle Icon is a submit button
 *PS: the links below is the website of the image, just search on the website and choose the individual hotel
 - https://www.hotels.com/
 >>
