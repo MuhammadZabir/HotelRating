@@ -57,6 +57,9 @@
     <beans:bean id="hotelImageDAO" class="com.hotelrating.dao.HotelImageDAOImpl">
             <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
+     <beans:bean id="ratingDAO" class="com.hotelrating.dao.RatingDAOImpl">
+            <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
     <beans:bean id="userDAO" class="com.hotelrating.dao.UserDAOImpl">
             <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
@@ -65,6 +68,9 @@
     </beans:bean>
     <beans:bean id="hotelImageService" class="com.hotelrating.service.HotelImageServletImpl">
             <beans:property name="hotelImageDAO" ref="hotelImageDAO"></beans:property>
+    </beans:bean>
+    <beans:bean id="ratingService" class="com.hotelrating.service.RatingServiceImpl">
+            <beans:property name="ratingDAO" ref="ratingDAO"></beans:property>
     </beans:bean>
     <beans:bean id="userService" class="com.hotelrating.service.UserServiceImpl">
             <beans:property name="userDAO" ref="userDAO"></beans:property>
