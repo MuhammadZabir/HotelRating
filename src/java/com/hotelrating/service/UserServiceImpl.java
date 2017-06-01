@@ -7,6 +7,7 @@ package com.hotelrating.service;
 
 import com.hotelrating.dao.UserDAO;
 import com.hotelrating.model.User;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,5 +59,12 @@ public class UserServiceImpl implements UserService
     public void deleteUser(long id)
     {
         this.userDAO.deleteUser(id) ;
+    }
+    
+    @Override
+    @Transactional
+    public boolean isValidUser(String user_name, String user_password)
+    {
+        return this.userDAO.isValidUser(user_name, user_password);
     }
 }

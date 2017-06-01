@@ -6,7 +6,9 @@
 package com.hotelrating.dao;
 
 import com.hotelrating.model.User;
+import java.math.BigInteger;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -74,5 +76,18 @@ public class UserDAOImpl implements UserDAO
         }
         logger.debug("User Deleted = {}", user) ;
     }
+    
+    @Override
+    public boolean isValidUser(String user_name, String user_password)
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        
+        Query query = session.createSQLQuery("SELECT COUNT(1) FROM user where user_name = :user_name AND user_password = :user_password")
+                .setParameter("user_name", user_name).setParameter("user_password", user_password) ;
+        List<BigInteger> results = query.list() ;
+        
+        return results.get(0).intValue() > 0 ;
+    }
+
     
 }

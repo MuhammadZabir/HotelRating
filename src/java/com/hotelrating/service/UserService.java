@@ -6,6 +6,7 @@
 package com.hotelrating.service;
 
 import com.hotelrating.model.User;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -19,4 +20,5 @@ public interface UserService
     public List<User> listUsers() ;
     public User getUserById(long id) ;
     public void deleteUser(long id) ;
+    public boolean isValidUser(String user_name, String user_password) ;
 }
