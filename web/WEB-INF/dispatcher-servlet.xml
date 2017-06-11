@@ -66,7 +66,7 @@
     <beans:bean id="hotelService" class="com.hotelrating.service.HotelServiceImpl">
             <beans:property name="hotelDAO" ref="hotelDAO"></beans:property>
     </beans:bean>
-    <beans:bean id="hotelImageService" class="com.hotelrating.service.HotelImageServletImpl">
+    <beans:bean id="hotelImageService" class="com.hotelrating.service.HotelImageServiceImpl">
             <beans:property name="hotelImageDAO" ref="hotelImageDAO"></beans:property>
     </beans:bean>
     <beans:bean id="ratingService" class="com.hotelrating.service.RatingServiceImpl">
