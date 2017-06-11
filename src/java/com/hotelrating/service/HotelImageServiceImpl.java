@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author user
  */
 @Service
-public class HotelImageServletImpl implements HotelImageService
+public class HotelImageServiceImpl implements HotelImageService
 {
     private HotelImageDAO hotelImageDAO ;
     
