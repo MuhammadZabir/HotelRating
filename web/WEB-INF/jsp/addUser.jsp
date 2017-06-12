@@ -9,39 +9,49 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;">
+        <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>Add User</title>
     </head>
     <body>
-         <center>
-        <br>
-        <br>
-        <h1>Add User</h1>
+         <nav class="navbar navbar-default">
+           
+         </nav>
+        <div class="container" align="center">
+            <div class="panel panel-success" style="max-width: 100;">
+                
+                <div class="panel-heading text-center"><h3>ADD USER</h3></div>
+       
 
-        Username:
-        <input type="text" name="user_name" value="" size="30" /><br><br>
+         <div class="panel-body">
+        <input type="text" name="user_name" value="" size="50" placeholder="USER NAME"/></div>
          
-         Password:
-         <input type="password" name="user_password" value="" size="30" /><br><br>
+          <div class="panel-body">
+         <input type="password" name="user_password" value="" size="50" placeholder="PASSWORD"/></div>
+                
+                 <div class="panel-body">
+         <input type="password" name="confom_password" value="" size="50" placeholder="CONFOMATION PASSWORD"/></div>
          
-         User Type:
+         <div class="panel-body">
          <select name="user_type" >
-             <option>-----------------------------------------------------------</option>
+             <option>_______________________USER TYPE:-_________________________</option>
                  <option value="Traveler" >Traveler</option>
                  <option value="Family">Family</option>
                  <option value="Business">Business</option>
              </select>
-         <br><br>
+         </div>
          
-         Full Name:
-         <input type="text" name="user_fullname" value="" size="30"/><br><br>
+          <div class="panel-body">
+         <input type="text" name="user_fullname" value="" size="50" placeholder="FULL NAME"/></div>
          
-         User Age:
-         <input type="text" name="user_age" value="" size="30" /><br><br>
+          <div class="panel-body">
+         <input type="text" name="user_age" value="" size="50" placeholder="AGE"/></div>
          
          
-         User Location:
+         <div class="panel-body">
           <select name="user_location">
-            <option>-----------------------------------------------------------</option>
+            <option>______________________Hotel Location:-_______________________</option>
             <option value="Johor">Johor</option>
             <option value="Melaka">Melaka</option>
             <option value="Negeri Sembila">Negeri Sembilan</option>
@@ -58,13 +68,11 @@
             <option value="Labuan">Labuan</option>
         </select>
          
-         <br>
-         
-         <br>
-         <br>
+         </div>
          
         <input type="submit" value="Submit" name="submit" />
         <input type="reset" value="Reset" name="reset" />
-        </center>
+        </div>
+        </div>
     </body>
 </html>
