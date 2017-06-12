@@ -59,4 +59,11 @@ public class HotelServiceImpl implements HotelService
     {
         this.hotelDAO.deleteHotel(id) ;
     }
+    
+    @Override
+    @Transactional
+    public List<Hotel> listHotelsPage(int page, int size)
+    {
+        return this.hotelDAO.listHotelsPage(page, size) ;
+    }
 }

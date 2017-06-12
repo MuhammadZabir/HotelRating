@@ -19,4 +19,5 @@ public interface HotelDAO
     public List<Hotel> listHotels() ;
     public Hotel getHotelById(long id) ;
     public void deleteHotel(long id) ;
+    public List<Hotel> listHotelsPage(int page, int size) ;
 }
