@@ -15,11 +15,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                 </div>
-                <ul class="nav navbar-nav navbar-right" style="height: 100;">
+                <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><h3>HOME</h3></a></li>
                     <li><a href="#"><h3>DASHBOARD</h3></a></li>
                     <li><a href="#"><h3>ADD HOTEL</h3></a></li>

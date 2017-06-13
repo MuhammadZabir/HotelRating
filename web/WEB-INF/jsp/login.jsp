@@ -2,21 +2,24 @@
     <head>
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container-fluid">
-            <nav class="navbar navbar-inverse">
-                <div class="navbar-header">
+        
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><h3>HOME</h3></a></li>
+                        <li><a href="#"><h3>DASHBOARD</h3></a></li>
+                        <li><a href="#"><h3>SIGN UP / LOGIN</h3></a></li>
+                    </ul>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><h3>HOME</h3></a></li>
-                    <li><a href="#"><h3>DASHBOARD</h3></a></li>
-                    <li><a href="#"><h3>SIGN UP / LOGIN</h3></a></li>
-                </ul>
-        </nav>
+            </nav>
+      
             <div class = "row">
                 <div class = "col-md-4">
                 </div>
@@ -31,6 +34,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </body>
 </html>

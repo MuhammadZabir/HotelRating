@@ -18,8 +18,9 @@
          <nav class="navbar navbar-default">
            
          </nav>
-        <div class="container" align="center">
-            <div class="panel panel-success" style="max-width: 100;">
+        <div class="col-md-3"></div>
+        <div class="container col-md-6" align="center">
+            <div class="panel panel-success">
                 
                 <div class="panel-heading text-center"><h3>ADD USER</h3></div>
        
