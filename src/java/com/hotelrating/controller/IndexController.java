@@ -6,6 +6,7 @@
 package com.hotelrating.controller;
 
 import com.hotelrating.model.User;
+import com.hotelrating.service.HotelService;
 import com.hotelrating.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,13 +25,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController 
 {
-     private UserService userService ;
+    private UserService userService ;
+    private HotelService hotelService ;
     
     @Autowired(required = true)
     @Qualifier(value = "userService")
     public void setUserService(UserService userService)
     {
         this.userService = userService ;
+    }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "hotelService")
+    public void setHotelService(HotelService hotelService)
+    {
+        this.hotelService = hotelService ;
     }
     
     @RequestMapping(value = "/")
@@ -55,6 +64,7 @@ public class IndexController
                 System.out.println("User Login Successful");
                 request.setAttribute("loggedInUser", user.getUserFullname());
                 model = new ModelAndView();
+                model.addObject("hotels", this.hotelService.listHotelsPage(0, 10)) ;
                 model.setViewName("index") ;
             }
             else

@@ -8,13 +8,13 @@ package com.hotelrating.dao;
 import com.hotelrating.model.Hotel;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,24 +86,14 @@ public class HotelDAOImpl implements HotelDAO
     {
         List<Hotel> hotels = null;
         Session session = this.sessionFactory.getCurrentSession() ;
-        try 
-        {
-            ScrollableResults scrollableResults = getCriteria(session).scroll() ;
-            scrollableResults.last() ;
-            scrollableResults.close() ;
-            Criteria criteria = getCriteria(session) ;
-            criteria.setFirstResult(page) ;
-            criteria.setMaxResults(size) ;
-            hotels = criteria.list() ;
-        } 
-        catch (HibernateException e) 
-        {
-            e.printStackTrace();
-        } 
-        finally 
-        {
-            session.close();
-        }
+        Criteria criteria = getCriteria(session) ;
+        ScrollableResults scrollableResults = criteria.scroll() ;
+        scrollableResults.last() ;
+        scrollableResults.close() ;
+        criteria.setFirstResult(page) ;
+        criteria.setMaxResults(size) ;
+        hotels = criteria.list() ;
+        
         return hotels;
     }
     
@@ -128,10 +118,14 @@ public class HotelDAOImpl implements HotelDAO
     private static Criteria getCriteria(Session session) 
     {
         Criteria criteria = session.createCriteria(Hotel.class);
-        criteria.add(Restrictions.isNotNull("hotelName"));
+        criteria.add(Restrictions.isNotNull("hotelId"));
         criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("hotelName"))
-                .add(Projections.property("hotelId")));
+                .add(Projections.property("hotelId"), "hotelId")
+                .add(Projections.property("hotelName"), "hotelName")
+                .add(Projections.property("hotelOwner"), "hotelOwner")
+                .add(Projections.property("hotelLocation"), "hotelLocation")
+                .add(Projections.property("hotelDescription"), "hotelDescription"))
+                .setResultTransformer(Transformers.aliasToBean(Hotel.class)) ;
         criteria.addOrder(Order.asc("hotelId"));
         return criteria;
     }
