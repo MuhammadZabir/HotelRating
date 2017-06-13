@@ -84,8 +84,8 @@ public class HotelDAOImpl implements HotelDAO
     @Override
     public List<Hotel> listHotelsPage(int page, int size)
     {
-        List<Hotel> products = null;
-        final Session session = this.sessionFactory.getCurrentSession() ;
+        List<Hotel> hotels = null;
+        Session session = this.sessionFactory.getCurrentSession() ;
         try 
         {
             ScrollableResults scrollableResults = getCriteria(session).scroll() ;
@@ -94,7 +94,7 @@ public class HotelDAOImpl implements HotelDAO
             Criteria criteria = getCriteria(session) ;
             criteria.setFirstResult(page) ;
             criteria.setMaxResults(size) ;
-            products = criteria.list() ;
+            hotels = criteria.list() ;
         } 
         catch (HibernateException e) 
         {
@@ -104,7 +104,25 @@ public class HotelDAOImpl implements HotelDAO
         {
             session.close();
         }
-        return products;
+        return hotels;
+    }
+    
+    @Override
+    public List<Hotel> searchHotelsPage(String search, int page, int size)
+    {
+        List<Hotel> hotels = null ;
+        Session session = this.sessionFactory.getCurrentSession() ;
+        Criteria criteria = getCriteria(session) ;
+        criteria.add(Restrictions.sqlRestriction("MATCH({alias}.hotel_name) AGAINST('" +
+                                                  search + "' IN BOOLEAN MODE)")) ;
+        criteria.setFirstResult(page) ;
+        criteria.setMaxResults(size) ;
+        ScrollableResults scrollableResults = criteria.scroll() ;
+        scrollableResults.last() ;
+        scrollableResults.close() ;
+        hotels = criteria.list() ;
+        
+        return hotels ;
     }
     
     private static Criteria getCriteria(Session session) 

@@ -37,22 +37,15 @@ public class IndexController
     public ModelAndView index(HttpServletRequest request)
     {
         ModelAndView model = new ModelAndView() ;
-        model.setViewName("index") ;
+        model.addObject("user", new User()) ;
+        model.setViewName("login") ;
         return model ;
     }
     
-    @RequestMapping(value="/login",method=RequestMethod.GET)
-    public ModelAndView displayLogin(HttpServletRequest request, HttpServletResponse response)
-    {
-        ModelAndView model = new ModelAndView();
-        model.addObject("user", new User()) ;
-        model.setViewName("login");
-        return model;
-    }
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user")User user)
     {
-        ModelAndView model= null;
+        ModelAndView model = null;
         try
         {
             System.out.println(user.getUserPassword()) ;

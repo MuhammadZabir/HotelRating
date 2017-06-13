@@ -7,6 +7,8 @@ package com.hotelrating.controller;
 
 import com.hotelrating.model.Hotel;
 import com.hotelrating.service.HotelService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -32,10 +34,9 @@ public class HotelController
         this.hotelService = hotelService ;
     }
     
-    @RequestMapping(value = "/hotels", method = RequestMethod.GET)
-    public String listHotels(Model model)
+    @RequestMapping(value = "/hotels")
+    public String listHotels(HttpServletRequest request, HttpSession session, Model model)
     {
-        model.addAttribute("hotel", new Hotel()) ;
         model.addAttribute("listHotels", this.hotelService.listHotels()) ;
         return "hotel" ;
     }
