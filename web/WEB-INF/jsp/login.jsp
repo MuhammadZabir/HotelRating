@@ -1,11 +1,11 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
     <head>
-        <title>Bootstrap Example</title>
+        <title>Login</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="/HotelRating/css/bootstrap.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/HotelRating/js/bootstrap.min.js"></script>
     </head>
     <body>     
         <form:form action = "/HotelRating/login" method = "post" modelAttribute = "user">
@@ -36,12 +36,12 @@
                 </div>
                 <div class = "col-md-4">
                     <div class="panel panel-success">
-                       <div class="panel-heading text-center"><h3>SIGN UP</h3></div>
+                       <div class="panel-heading text-center"><h3>LOG IN</h3></div>
                        <div class="panel-body"><form:input path = "userName" type="text" class="form-control" id="user_email" placeholder="Email Address"/></div>
                        <div class="panel-body text-right"><a href="#">Forgot Password</a></div>
                        <div class="panel-body"><form:input path = "userPassword" type="password" class="form-control" id="user_password" placeholder="Password"/></div>
                        <div class="panel-body"><input type="checkbox" value="" disabled>Remember me?</div>
-                       <div class="panel-body text-right"><button type="submit" class="btn btn-success">Sign Up</button></div>
+                       <div class="panel-body text-right"><button type="submit" class="btn btn-success">Log In</button></div>
                     </div>
                 </div>
             </div>

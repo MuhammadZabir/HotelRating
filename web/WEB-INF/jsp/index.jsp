@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="/HotelRating/css/bootstrap.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="/HotelRating/js/bootstrap.min.js"></script>
         <style>
             html,
             body,
@@ -18,7 +18,8 @@
                 -o-background-size: cover;
                 background-size: cover;
             }
-        </style>    
+        </style>  
+        <title>Welcome</title>
     </head>
     <body>
         <div class="fullImage">
@@ -26,11 +27,21 @@
                 <div class="container-fluid">
                     <div class = "row">
                         <div class = "col-md-12">
-                            <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+                           <!-- <nav class="navbar navbar-toggleable-md navbar-default bg-inverse">
                                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                                         <li class="nav-item"><a class = "nav-link" href="#"><h3>HOME</h3></a></li>
                                         <li class="nav-item"><a class = "nav-link" href="#"><h3>LOGOUT</h3></a></li>
                                     </ul>
+                            </nav>-->
+                            <nav class="navbar navbar-default">
+                                <div class="container-fluid">
+                                <div class="navbar-header">
+                                </div>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="#"><h3>HOME</h3></a></li>
+                                        <li><a href="#"><h3>LOGOUT</h3></a></li>
+                                    </ul>
+                                </div>
                             </nav>
                         </div>
                     </div>
