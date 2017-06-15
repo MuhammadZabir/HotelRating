@@ -21,4 +21,6 @@ public interface HotelDAO
     public void deleteHotel(long id) ;
     public List<Hotel> listHotelsPage(int page, int size) ;
     public List<Hotel> searchHotelsPage(String search, int page, int size) ;
+    public int countHotels() ;
+    public int searchCountHotels(String search) ;
 }

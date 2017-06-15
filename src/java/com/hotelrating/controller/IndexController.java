@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,13 +58,15 @@ public class IndexController
         ModelAndView model = null;
         try
         {
-            System.out.println(user.getUserPassword()) ;
             boolean isValidUser = userService.isValidUser(user.getUserName(), user.getUserPassword());
             if(isValidUser)
             {
-                System.out.println("User Login Successful");
                 request.setAttribute("loggedInUser", user.getUserFullname());
                 model = new ModelAndView();
+                int totalCount = this.hotelService.countHotels() ;
+                double page = Math.ceil((double) totalCount / 10.0) ;
+                request.setAttribute("page", (int) page) ;
+                request.setAttribute("active", 1);
                 model.addObject("hotels", this.hotelService.listHotelsPage(0, 10)) ;
                 model.setViewName("index") ;
             }
@@ -81,6 +84,20 @@ public class IndexController
         }
 
         return model;
+    }
+    
+    @RequestMapping(value="/index/{page}", method = RequestMethod.GET)
+    public ModelAndView allIndexPage(HttpServletRequest request, HttpServletResponse response, @PathVariable("page") int page)
+    {
+        ModelAndView model = new ModelAndView();
+        int currentPage = page - 1 ;
+        int totalCount = this.hotelService.countHotels() ;
+        double pages = Math.ceil(totalCount / 10) ;
+        request.setAttribute("page", (int) pages) ;
+        request.setAttribute("active", page);
+        model.addObject("hotels", this.hotelService.listHotelsPage(currentPage, 10)) ;
+        model.setViewName("index") ;
+        return model ;
     }
     
 }

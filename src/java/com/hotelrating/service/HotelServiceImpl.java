@@ -66,4 +66,18 @@ public class HotelServiceImpl implements HotelService
     {
         return this.hotelDAO.listHotelsPage(page, size) ;
     }
+    
+    @Override
+    @Transactional
+    public int countHotels()
+    {
+        return this.hotelDAO.countHotels() ;
+    }
+    
+    @Override
+    @Transactional
+    public int searchCountHotels(String search)
+    {
+        return this.hotelDAO.searchCountHotels(search) ;
+    }
 }

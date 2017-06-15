@@ -6,6 +6,7 @@
 package com.hotelrating.dao;
 
 import com.hotelrating.model.Hotel;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.ScrollableResults;
@@ -90,7 +91,7 @@ public class HotelDAOImpl implements HotelDAO
         ScrollableResults scrollableResults = criteria.scroll() ;
         scrollableResults.last() ;
         scrollableResults.close() ;
-        criteria.setFirstResult(page) ;
+        criteria.setFirstResult(page * 10) ;
         criteria.setMaxResults(size) ;
         hotels = criteria.list() ;
         
@@ -105,14 +106,33 @@ public class HotelDAOImpl implements HotelDAO
         Criteria criteria = getCriteria(session) ;
         criteria.add(Restrictions.sqlRestriction("MATCH({alias}.hotel_name) AGAINST('" +
                                                   search + "' IN BOOLEAN MODE)")) ;
-        criteria.setFirstResult(page) ;
-        criteria.setMaxResults(size) ;
         ScrollableResults scrollableResults = criteria.scroll() ;
         scrollableResults.last() ;
         scrollableResults.close() ;
+        criteria.setFirstResult(page * 10) ;
+        criteria.setMaxResults(size) ;
         hotels = criteria.list() ;
         
         return hotels ;
+    }
+    
+    @Override
+    public int countHotels()
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        logger.debug("Get list of Hotel") ;
+        BigInteger result = (BigInteger) session.createSQLQuery("SELECT COUNT(*) FROM hotel").uniqueResult() ;
+        return result.intValue() ;
+    }
+    
+    @Override
+    public int searchCountHotels(String search)
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        logger.debug("Get list of Hotel") ;
+        BigInteger result = (BigInteger) session.createSQLQuery("SELECT COUNT(*) FROM hotel WHERE MATCH(hotel_name) AGAINST(':search' IN BOOLEAN MODE)")
+               .setString("search", search).uniqueResult() ;
+        return result.intValue() ;
     }
     
     private static Criteria getCriteria(Session session) 

@@ -22,6 +22,11 @@
         <title>Welcome</title>
     </head>
     <body>
+        <%
+            int paging = (Integer) request.getAttribute("page");
+            String search = (String) request.getAttribute("search");
+            int active = (Integer) request.getAttribute("active");
+        %>
         <div class="fullImage">
             <div class="full-bg-img flex-center">
                 <div class="container-fluid">
@@ -78,6 +83,43 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
+                                    <ul class = "nav">
+                                            <%
+                                                for (int x = 1 ; x <= paging ; x++)
+                                                {
+                                                    if (search != null)
+                                                    {
+                                                        if (active == x)
+                                                        {
+                                            %>
+                                                            <a class = "nav-link active" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a>
+                                            <%
+                                                        }
+                                                        else
+                                                        {
+                                            %>
+                                                            <a class = "nav-link" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a>
+                                            <%
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (active == x)
+                                                        {
+                                            %>
+                                                            <a class = "nav-link active" href="/HotelRating/index/<%=x%>"><%=x%></a>
+                                            <%
+                                                        }
+                                                        else
+                                                        {
+                                            %>
+                                                            <a class = "nav-link" href="/HotelRating/index/<%=x%>"><%=x%></a>
+                                            <%
+                                                        }
+                                                    }
+                                                }
+                                            %>
+                                    </ul>
                                 </div>
                             </c:if>
                         </div>
