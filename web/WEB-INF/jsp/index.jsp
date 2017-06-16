@@ -57,15 +57,17 @@
                         <div class = "col-md-2"><input type="submit" value="Search" name="submit" class="btn btn-success"></div>
                         <div class = "col-md-2"></div>
                     </div>
+                    <br/>
+                    <br/>
                     <div class="hidden-xs hidden-md hidden-lg"><br></div>
                     <div class = "row">
                         <div class = "col-md-2"></div>
                         <div class = "col-md-8">
                             <c:if test = "${!empty hotels}">
                                 <div class = "table-responsive">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped table-hover">
                                         <thead class = "thead-inverse">
-                                            <tr>
+                                            <tr  class="info">
                                                 <th>Hotel Name</th>
                                                 <th>Hotel Owner</th>
                                                 <th>Hotel Location</th>
@@ -74,7 +76,7 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach items = "${hotels}" var = "hotel">
-                                                <tr>
+                                                <tr bgcolor="#ffffff">
                                                     <td>${hotel.hotelName}</td>
                                                     <td>${hotel.hotelOwner}</td>
                                                     <td>${hotel.hotelLocation}</td>
@@ -83,7 +85,7 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                    <ul class = "nav">
+                                    <ul class="pagination pagination-sm">
                                             <%
                                                 for (int x = 1 ; x <= paging ; x++)
                                                 {
@@ -92,13 +94,13 @@
                                                         if (active == x)
                                                         {
                                             %>
-                                                            <a class = "nav-link active" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a>
+                                            <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
                                             <%
                                                         }
                                                         else
                                                         {
                                             %>
-                                                            <a class = "nav-link" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a>
+                                                            <li><a class = "nav-link" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
                                             <%
                                                         }
                                                     }
@@ -107,13 +109,13 @@
                                                         if (active == x)
                                                         {
                                             %>
-                                                            <a class = "nav-link active" href="/HotelRating/index/<%=x%>"><%=x%></a>
+                                                            <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
                                             <%
                                                         }
                                                         else
                                                         {
                                             %>
-                                                            <a class = "nav-link" href="/HotelRating/index/<%=x%>"><%=x%></a>
+                                                            <li><a class = "nav-link" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
                                             <%
                                                         }
                                                     }

@@ -14,7 +14,7 @@
         <script src="/HotelRating/js/bootstrap.min.js"></script>
         <title>Dashboard</title>
     </head>
-    <body>
+    <body background="http://wallpapercave.com/wp/2u5OrmL.png">
         <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -26,87 +26,156 @@
                     </ul>
                 </div>
         </nav>
+        
+        <h1>Hotel Name</h1>
         <!-- Vertical, rounded -->
 
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="container vertical rounded">
+                    
+                            <h2>Percentage Customers Per State</h2>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>100%</span><br/>
+                                  <span>Perak</span>
+                                </div>
+                              </div>
+                            </div>
 
-<div class="container vertical rounded">
-  <h2>Vertical, Rounded</h2>
-  <div class="progress-bar">
-    <div class="progress-track">
-      <div class="progress-fill">
-        <span>100%</span>
-      </div>
-    </div>
-  </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>75%</span><br/>
+                                  <span>Kelantan</span>
+                                </div>
+                              </div>
+                            </div>
 
-  <div class="progress-bar">
-    <div class="progress-track">
-      <div class="progress-fill">
-        <span>75%</span>
-      </div>
-    </div>
-  </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>60%</span><br/>
+                                  <span>Kedah</span>
+                                </div>
+                              </div>
+                            </div>
 
-  <div class="progress-bar">
-    <div class="progress-track">
-      <div class="progress-fill">
-        <span>60%</span>
-      </div>
-    </div>
-  </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>20%</span><br/>
+                                  <span>Terengganu</span>
+                                </div>
+                              </div>
+                            </div>
 
-  <div class="progress-bar">
-    <div class="progress-track">
-      <div class="progress-fill">
-        <span>20%</span>
-      </div>
-    </div>
-  </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>34%</span><br/>
+                                  <span>Pahang</span>
+                                </div>
+                              </div>
+                            </div>
 
-  <div class="progress-bar">
-    <div class="progress-track">
-      <div class="progress-fill">
-        <span>34%</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="progress-bar">
-    <div class="progress-track">
-      <div class="progress-fill">
-        <span>82%</span>
-      </div>
-    </div>
-  </div>
-</div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>Perlis</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>Penang</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>Selangor</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>Johore</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>Malacca</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>N. Sembilan</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>Sabah</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress-track">
+                                <div class="progress-fill">
+                                  <span>82%</span><br/>
+                                  <span>Sarawak</span>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
         
         
-        <div class="container-fluid">
-            
-            <table border ="1">
-                <tr>
-                    <td> <h2>Reviews</h2></td>
-                    <td> <h2>User Type</h2></td>
-                    <td> <h2>Ranking</h2></td>
-                </tr>
-                 <tr>
-                    <td>
-                     <div id="chart"></div>
-                    </td>
-                    <td><canvas id="pie" width="650" height="350"></canvas></td>
-                    <td><h1>#30</h1></td> 
-                </tr>
-                
-                
-            </table>
-           
+            <div class="jumbotron">
+                <div class="container-fluid">
 
-        </div>
+                    <table table-bordered >
+                        <tr>
+                            <td> <h2>Reviews</h2></td>
+                            <td> <h2>User Type</h2></td>
+                            <td> <h2>Ranking</h2></td>
+                        </tr>
+                         <tr>
+                             <td><div class="col-md-4"><div id="chart"></div></div></td>
+                            <td class="col-md-4"><canvas id="pie" width="650" height="350"></canvas></td>
+                            <td class="col-md-4"><h1>#30</h1></td> 
+                        </tr>
+
+
+                    </table>
+
+
+                </div>
+            </div>
         
-         
     </body>
 </html>
-
 <script> 
     
  // pie chart
@@ -571,7 +640,8 @@ h2 {
 }
 
 .container {
-  width: 500px;
+  align-content: center;
+  width: 95%;
   margin: 20px;
   background: #fff;
   padding: 20px;
@@ -585,13 +655,13 @@ h2 {
 .vertical .progress-bar {
   float: left;
   height: 300px;
-  width: 40px;
-  margin-right: 25px;
+  width: 70px;
+  margin-right: 22px;
 }
 
 .vertical .progress-track {
   position: relative;
-  width: 40px;
+  width: 70px;
   height: 100%;
   background: #ebebeb;
 }
@@ -600,7 +670,7 @@ h2 {
   position: relative;
   background: #825;
   height: 50%;
-  width: 40px;
+  width: 70px;
   color: #fff;
   text-align: center;
   font-family: "Lato","Verdana",sans-serif;
