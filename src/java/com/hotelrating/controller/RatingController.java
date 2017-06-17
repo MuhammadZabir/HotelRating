@@ -6,7 +6,10 @@
 package com.hotelrating.controller;
 
 import com.hotelrating.model.Rating;
+import com.hotelrating.service.HotelService;
 import com.hotelrating.service.RatingService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -24,12 +28,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RatingController 
 {
     private RatingService ratingService ;
+    private HotelService hotelService ;
     
     @Autowired(required = true)
     @Qualifier(value = "ratingService")
     public void setRatingService(RatingService ratingService)
     {
         this.ratingService = ratingService ;
+    }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "hotelService")
+    public void setHotelService(HotelService hotelService)
+    {
+        this.hotelService = hotelService ;
     }
     
     @RequestMapping(value = "/ratings", method = RequestMethod.GET)
@@ -67,6 +79,15 @@ public class RatingController
         model.addAttribute("rating", this.ratingService.getRatingById(id)) ;
         model.addAttribute("listRatings", this.ratingService.listRatings()) ;
         return "rating" ;
+    }
+    
+    @RequestMapping(value = "/rating/{id}", method = RequestMethod.GET)
+    public ModelAndView viewRateForm(HttpServletRequest request, HttpServletResponse response, @PathVariable long id) 
+    {
+        ModelAndView model = new ModelAndView() ;
+        model.addObject("hotel", this.hotelService.getHotelById(id)) ;
+        model.setViewName("ratingHotel") ;
+        return model ;
     }
     
 }

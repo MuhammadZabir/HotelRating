@@ -72,6 +72,7 @@
                                                 <th>Hotel Owner</th>
                                                 <th>Hotel Location</th>
                                                 <th>Hotel Description</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -81,6 +82,7 @@
                                                     <td>${hotel.hotelOwner}</td>
                                                     <td>${hotel.hotelLocation}</td>
                                                     <td>${hotel.hotelDescription}</td>
+                                                    <td><a class = "btn" href="/HotelRating/rating/${hotel.hotelId}">Rate Us!</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
