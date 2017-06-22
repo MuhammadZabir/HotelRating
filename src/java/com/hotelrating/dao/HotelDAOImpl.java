@@ -66,8 +66,8 @@ public class HotelDAOImpl implements HotelDAO
     public Hotel getHotelById(long id)
     {
         Session session = this.sessionFactory.getCurrentSession() ;
-        logger.debug("Get Hotel by ID = {}", id) ;
-        return (Hotel) session.load(Hotel.class, id) ;
+        logger.info("Get Hotel by ID = {}", id) ;
+        return (Hotel) session.get(Hotel.class, id) ;
     }
     
     @Override

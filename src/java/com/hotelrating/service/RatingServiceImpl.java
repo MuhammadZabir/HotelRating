@@ -60,4 +60,17 @@ public class RatingServiceImpl implements RatingService
         this.ratingDAO.deleteRating(id) ;
     }
     
+    @Override
+    @Transactional
+    public boolean validateExistance(long hotelId, long userId)
+    {
+        return this.ratingDAO.validateExistance(hotelId, userId) ;
+    }
+    
+    @Override
+    @Transactional
+    public Rating getRatingByHotelAndUser(long hotelId, long userId)
+    {
+        return this.ratingDAO.getRatingByHotelAndUser(hotelId, userId) ;
+    }
 }

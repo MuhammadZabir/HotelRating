@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,10 +51,10 @@ public class Rating implements Serializable {
     @Column(name = "rating_comment")
     private String ratingComment;
     @JoinColumn(name = "rating_hotel", referencedColumnName = "hotel_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Hotel ratingHotel;
     @JoinColumn(name = "rating_user", referencedColumnName = "user_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User ratingUser;
 
     public Rating() {

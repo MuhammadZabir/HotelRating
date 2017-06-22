@@ -19,4 +19,6 @@ public interface RatingService
     public List<Rating> listRatings() ;
     public Rating getRatingById(long id) ;
     public void deleteRating(long id) ;
+    public boolean validateExistance(long hotelId, long userId) ;
+    public Rating getRatingByHotelAndUser(long hotelId, long userId) ;
 }

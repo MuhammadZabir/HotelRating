@@ -6,13 +6,16 @@
 package com.hotelrating.dao;
 
 import com.hotelrating.model.Rating;
+import java.math.BigInteger;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import static org.springframework.transaction.annotation.Propagation.REQUIRED;
 
 /**
  *
@@ -73,5 +76,33 @@ public class RatingDAOImpl implements RatingDAO
             session.delete(rating) ;
         }
         logger.debug("Rating deleted = {}", rating) ;
+    }
+    
+    @Override
+    public boolean validateExistance(long hotelId, long userId)
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        Query query = session.createSQLQuery("SELECT COUNT(1) FROM rating where rating_user = :rating_user AND rating_hotel = :rating_hotel")
+                .setParameter("rating_user", hotelId).setParameter("rating_hotel", userId) ;
+        List<BigInteger> results = query.list() ;
+        
+        return results.get(0).intValue() > 0 ;
+    }
+    
+    @Override   
+    public Rating getRatingByHotelAndUser(long hotelId, long userId) //This is one of way to implement check IndexController for another
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        Rating rate = null ;
+        Query query =  session.createQuery("FROM Rating WHERE ratingHotel.hotelId = :ratingHotel AND ratingUser.userId = :ratingUser") ;
+        query.setParameter("ratingHotel", hotelId) ;
+        query.setParameter("ratingUser", userId) ;
+        List<Rating> results = query.list() ;
+        for (Rating rating : results)
+        {
+            rate = rating ;
+        }
+        
+        return rate ;
     }
 }

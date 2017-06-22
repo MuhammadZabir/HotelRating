@@ -21,4 +21,5 @@ public interface UserDAO
     public User getUserById(long id) ;
     public void deleteUser(long id) ;
     public boolean isValidUser(String user_name, String user_password) ;
+    public User getUserByNameAndPassword(String user_name, String user_password) ;
 }

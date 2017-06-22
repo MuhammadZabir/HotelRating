@@ -10,6 +10,7 @@ import com.hotelrating.service.HotelService;
 import com.hotelrating.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -53,19 +54,19 @@ public class IndexController
     }
     
     @RequestMapping(value="/login",method=RequestMethod.POST)
-    public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user")User user)
+    public ModelAndView executeLogin(HttpSession session, HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user")User user)
     {
         ModelAndView model = null;
         try
         {
-            boolean isValidUser = userService.isValidUser(user.getUserName(), user.getUserPassword());
-            if(isValidUser)
+            if(userService.isValidUser(user.getUserName(), user.getUserPassword()))
             {
-                request.setAttribute("loggedInUser", user.getUserFullname());
+                user = userService.getUserByNameAndPassword(user.getUserName(), user.getUserPassword()) ;
+                session.setAttribute("loggedInUser", user);
                 model = new ModelAndView();
                 int totalCount = this.hotelService.countHotels() ;
                 double page = Math.ceil((double) totalCount / 10.0) ;
-                request.setAttribute("page", (int) page) ;
+                request.setAttribute("paging", (int) page) ;
                 request.setAttribute("active", 1);
                 model.addObject("hotels", this.hotelService.listHotelsPage(0, 10)) ;
                 model.setViewName("index") ;
@@ -92,8 +93,8 @@ public class IndexController
         ModelAndView model = new ModelAndView();
         int currentPage = page - 1 ;
         int totalCount = this.hotelService.countHotels() ;
-        double pages = Math.ceil(totalCount / 10) ;
-        request.setAttribute("page", (int) pages) ;
+        double pages = Math.ceil((double) totalCount / 10.0) ;
+        request.setAttribute("paging", (int) pages) ;
         request.setAttribute("active", page);
         model.addObject("hotels", this.hotelService.listHotelsPage(currentPage, 10)) ;
         model.setViewName("index") ;

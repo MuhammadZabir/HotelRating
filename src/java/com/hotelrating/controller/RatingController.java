@@ -5,11 +5,14 @@
  */
 package com.hotelrating.controller;
 
+import com.hotelrating.model.Hotel;
 import com.hotelrating.model.Rating;
+import com.hotelrating.model.User;
 import com.hotelrating.service.HotelService;
 import com.hotelrating.service.RatingService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -53,9 +56,12 @@ public class RatingController
     }
     
     @RequestMapping(value = "/rating/add", method = RequestMethod.POST)
-    public String addOrUpdateRating(@ModelAttribute("rating") Rating rating)
+    public ModelAndView addOrUpdateRating(HttpSession session, HttpServletRequest request, @ModelAttribute("rating") Rating rating)
     {
-        if (rating.getRatingId() == 0)
+        ModelAndView model = new ModelAndView();
+        rating.setRatingUser((User) session.getAttribute("loggedInUser")) ;
+        rating.setRatingHotel((Hotel) request.getSession().getAttribute("hotel"));
+        if (rating.getRatingId() == null)
         {
             this.ratingService.addRating(rating) ;
         }
@@ -63,7 +69,8 @@ public class RatingController
         {
             this.ratingService.updateRating(rating) ;
         }
-        return "redirect:/ratings" ;
+        model.setViewName("redirect:/index/1") ;
+        return model ;
     }
     
     @RequestMapping(value = "/rating/remove/{id}")
@@ -82,10 +89,20 @@ public class RatingController
     }
     
     @RequestMapping(value = "/rating/{id}", method = RequestMethod.GET)
-    public ModelAndView viewRateForm(HttpServletRequest request, HttpServletResponse response, @PathVariable long id) 
+    public ModelAndView viewRateForm(HttpSession session, HttpServletRequest request, HttpServletResponse response, @PathVariable long id) 
     {
         ModelAndView model = new ModelAndView() ;
-        model.addObject("hotel", this.hotelService.getHotelById(id)) ;
+        User user = (User) session.getAttribute("loggedInUser") ;
+        request.setAttribute("hotel", this.hotelService.getHotelById(id)) ;
+        if (this.ratingService.validateExistance(id, user.getUserId()))
+        {
+            model.addObject("rating", this.ratingService.getRatingByHotelAndUser(id, user.getUserId())) ;
+        }
+        
+        else
+        {
+            model.addObject("rating", new Rating()) ;
+        }     
         model.setViewName("ratingHotel") ;
         return model ;
     }

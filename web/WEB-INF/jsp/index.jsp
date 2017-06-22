@@ -23,7 +23,7 @@
     </head>
     <body>
         <%
-            int paging = (Integer) request.getAttribute("page");
+            int paging = (Integer) request.getAttribute("paging");
             String search = (String) request.getAttribute("search");
             int active = (Integer) request.getAttribute("active");
         %>
@@ -64,10 +64,10 @@
                         <div class = "col-md-2"></div>
                         <div class = "col-md-8">
                             <c:if test = "${!empty hotels}">
-                                <div class = "table-responsive">
+                                <div class = "table-responsive pre-scrollable">
                                     <table class="table table-striped table-hover">
                                         <thead class = "thead-inverse">
-                                            <tr  class="info">
+                                            <tr class="info">
                                                 <th>Hotel Name</th>
                                                 <th>Hotel Owner</th>
                                                 <th>Hotel Location</th>
@@ -87,44 +87,44 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                    <ul class="pagination pagination-sm">
-                                            <%
-                                                for (int x = 1 ; x <= paging ; x++)
-                                                {
-                                                    if (search != null)
-                                                    {
-                                                        if (active == x)
-                                                        {
-                                            %>
-                                            <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
-                                            <%
-                                                        }
-                                                        else
-                                                        {
-                                            %>
-                                                            <li><a class = "nav-link" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
-                                            <%
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (active == x)
-                                                        {
-                                            %>
-                                                            <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
-                                            <%
-                                                        }
-                                                        else
-                                                        {
-                                            %>
-                                                            <li><a class = "nav-link" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
-                                            <%
-                                                        }
-                                                    }
-                                                }
-                                            %>
-                                    </ul>
                                 </div>
+                                <ul class="pagination pagination-sm">
+                                    <%
+                                        for (int x = 1 ; x <= paging ; x++)
+                                        {
+                                            if (search != null)
+                                            {
+                                                if (active == x)
+                                                {
+                                    %>
+                                                    <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
+                                    <%
+                                                }
+                                                else
+                                                {
+                                    %>
+                                                    <li><a class = "nav-link" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
+                                    <%
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (active == x)
+                                                {
+                                    %>
+                                                    <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
+                                    <%
+                                                }
+                                                else
+                                                {
+                                    %>
+                                                    <li><a class = "nav-link" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
+                                    <%
+                                                }
+                                            }
+                                        }
+                                    %>
+                                </ul>
                             </c:if>
                         </div>
                         <div class = "col-md-2"></div>

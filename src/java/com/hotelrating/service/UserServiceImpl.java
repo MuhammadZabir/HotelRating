@@ -67,4 +67,11 @@ public class UserServiceImpl implements UserService
     {
         return this.userDAO.isValidUser(user_name, user_password);
     }
+    
+    @Override
+    @Transactional
+    public User getUserByNameAndPassword(String user_name, String user_password)
+    {
+        return this.userDAO.getUserByNameAndPassword(user_name, user_password) ;
+    }
 }

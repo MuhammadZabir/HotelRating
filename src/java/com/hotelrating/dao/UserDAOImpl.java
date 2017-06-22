@@ -89,5 +89,27 @@ public class UserDAOImpl implements UserDAO
         return results.get(0).intValue() > 0 ;
     }
 
-    
+    @Override
+    public User getUserByNameAndPassword(String user_name, String user_password) //This is one way to implement check RatingController for another
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        User user = new User() ;
+        Query query = session.createSQLQuery("SELECT * FROM user where user_name = :user_name AND user_password = :user_password")
+                .setParameter("user_name", user_name).setParameter("user_password", user_password) ;
+        List<Object[]> results = query.list() ;
+        for (Object[] obj : results)
+        {
+            BigInteger id = (BigInteger) obj[0] ;
+            user.setUserId(id.longValue()) ;
+            user.setUserName((String) obj[1]) ;
+            user.setUserPassword((String) obj[2]) ;
+            user.setUserType((int) obj[3]) ;
+            user.setUserRole((int) obj[4]) ;
+            user.setUserFullname((String) obj[5]) ;
+            user.setUserAge((int) obj[6]) ;
+            user.setUserLocation((String) obj[7]) ;
+        }
+        
+        return user ;
+    }
 }
