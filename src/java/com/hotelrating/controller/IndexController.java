@@ -8,6 +8,7 @@ package com.hotelrating.controller;
 import com.hotelrating.model.User;
 import com.hotelrating.service.HotelService;
 import com.hotelrating.service.UserService;
+import com.hotelrating.util.UserRoleEnum;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -52,7 +53,10 @@ public class IndexController
         User user = (User) session.getAttribute("loggedInUser") ;
         if (user != null)
         {
-            model.setViewName("redirect:/index/1");
+            if (user.getUserRole() == UserRoleEnum.User.getValue())
+                model.setViewName("redirect:/index/1") ;
+            else
+                model.setViewName("indexAdmin") ;
         }
         else
         {
@@ -67,17 +71,24 @@ public class IndexController
         ModelAndView model = null;
         try
         {
+            model = new ModelAndView();
             if(userService.isValidUser(user.getUserName(), user.getUserPassword()))
             {
                 user = userService.getUserByNameAndPassword(user.getUserName(), user.getUserPassword()) ;
-                session.setAttribute("loggedInUser", user);
-                model = new ModelAndView();
-                int totalCount = this.hotelService.countHotels() ;
-                double page = Math.ceil((double) totalCount / 10.0) ;
-                request.setAttribute("paging", (int) page) ;
-                request.setAttribute("active", 1);
-                model.addObject("hotels", this.hotelService.listHotelsPage(0, 10)) ;
-                model.setViewName("index") ;
+                session.setAttribute("loggedInUser", user) ;
+                if (user.getUserRole() == UserRoleEnum.User.getValue())
+                {
+                    int totalCount = this.hotelService.countHotels() ;
+                    double page = Math.ceil((double) totalCount / 10.0) ;
+                    request.setAttribute("paging", (int) page) ;
+                    request.setAttribute("active", 1) ;
+                    model.addObject("hotels", this.hotelService.listHotelsPage(0, 10)) ;
+                    model.setViewName("index") ;
+                }
+                else
+                {
+                    model.setViewName("indexAdmin") ;
+                }
             }
             else
             {
