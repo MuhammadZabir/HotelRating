@@ -45,11 +45,19 @@ public class IndexController
     }
     
     @RequestMapping(value = "/")
-    public ModelAndView index(HttpServletRequest request)
+    public ModelAndView index(HttpSession session, HttpServletRequest request)
     {
         ModelAndView model = new ModelAndView() ;
         model.addObject("user", new User()) ;
-        model.setViewName("login") ;
+        User user = (User) session.getAttribute("loggedInUser") ;
+        if (user != null)
+        {
+            model.setViewName("redirect:/index/1");
+        }
+        else
+        {
+            model.setViewName("login") ;
+        }
         return model ;
     }
     
@@ -90,14 +98,23 @@ public class IndexController
     @RequestMapping(value="/index/{page}", method = RequestMethod.GET)
     public ModelAndView allIndexPage(HttpServletRequest request, HttpServletResponse response, @PathVariable("page") int page)
     {
-        ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView() ;
         int currentPage = page - 1 ;
         int totalCount = this.hotelService.countHotels() ;
         double pages = Math.ceil((double) totalCount / 10.0) ;
         request.setAttribute("paging", (int) pages) ;
-        request.setAttribute("active", page);
+        request.setAttribute("active", page) ;
         model.addObject("hotels", this.hotelService.listHotelsPage(currentPage, 10)) ;
         model.setViewName("index") ;
+        return model ;
+    }
+    
+    @RequestMapping(value="/logout")
+    public ModelAndView logout(HttpSession session)
+    {
+        ModelAndView model = new ModelAndView();
+        session.invalidate() ;
+        model.setViewName("redirect:/") ;
         return model ;
     }
     

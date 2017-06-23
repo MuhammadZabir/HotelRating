@@ -12,4 +12,7 @@
     <system systemId="http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd" uri="www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"/>
     <system systemId="http://www.springframework.org/schema/beans/spring-beans-4.0.xsd" uri="www.springframework.org/schema/beans/spring-beans-4.0.xsd"/>
     <system systemId="http://www.springframework.org/schema/tool/spring-tool-4.0.xsd" uri="www.springframework.org/schema/tool/spring-tool-4.0.xsd"/>
+    <system systemId="http://www.springframework.org/schema/security" uri="www.springframework.org/schema/security/index"/>
+    <system systemId="http://www.springframework.org/schema/security/spring-security-3.1.xsd" uri="www.springframework.org/schema/security/spring-security-3.1.xsd"/>
+    <system systemId="http://www.springframework.org/schema/security/spring-security-4.2.xsd" uri="www.springframework.org/schema/security/spring-security-4.2.xsd"/>
 </catalog>

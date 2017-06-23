@@ -17,6 +17,15 @@
     <resources mapping="/css/**" location="/WEB-INF/css/" />
     <resources mapping="/fonts/**" location="/WEB-INF/fonts/" />
     <resources mapping="/js/**" location="/WEB-INF/js/" />
+    
+    <interceptors>
+        <beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+            <beans:property name="cacheSeconds" value="0"/>
+            <beans:property name="useExpiresHeader" value="false"/>
+            <beans:property name="useCacheControlHeader" value="true"/>
+            <beans:property name="useCacheControlNoStore" value="true"/>
+        </beans:bean>     
+    </interceptors>
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
@@ -76,6 +85,10 @@
     </beans:bean>
     <beans:bean id="userService" class="com.hotelrating.service.UserServiceImpl">
             <beans:property name="userDAO" ref="userDAO"></beans:property>
+    </beans:bean>
+    
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="100000" />
     </beans:bean>
     
     <context:component-scan base-package="com.hotelrating" />
