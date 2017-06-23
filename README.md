@@ -8,15 +8,15 @@ Main Contributor
 - Muhaafidz, Malaysia (Frontend Developer) @muhaafidz4ever
 - Muhammad Akmal Rasydan Bin Mohd Rosni, Malaysia (Frontend Developer) @arcmal
 
-These project uses mainly :-
+These project uses mainly
 	- Java Programming Language
 	- JSP
-	Framework :-
+	- Framework
 		- Hibernate
 		- Spring MVC
-	IDE :-
+	- IDE
 		- Netbeans
-	Server :-
+	- Server
 		- GlassFish Web Server
 		- MySQL Database Server
 		
