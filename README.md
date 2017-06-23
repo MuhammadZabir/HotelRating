@@ -9,16 +9,16 @@ Main Contributor
 - Muhammad Akmal Rasydan Bin Mohd Rosni, Malaysia (Frontend Developer) @arcmal
 
 These project uses mainly :-
-	Java Programming Language
-	JSP
+	- Java Programming Language
+	- JSP
 	Framework :-
-		Hibernate
-		Spring MVC
+		- Hibernate
+		- Spring MVC
 	IDE :-
-		Netbeans
+		- Netbeans
 	Server :-
-		GlassFish Web Server
-		MySQL Database Server
+		- GlassFish Web Server
+		- MySQL Database Server
 		
 P/S : Can still be export to other IDEs just export it out from netbeans.
 
