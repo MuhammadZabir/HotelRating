@@ -34,11 +34,11 @@ public class UserDAOImpl implements UserDAO
     }
     
     @Override
-    public void addUser(User user)
+    public User addUser(User user)
     {
         Session session = this.sessionFactory.getCurrentSession() ;
-        session.persist(user) ;
         logger.debug("Add User = {}", user) ;
+        return (User) session.merge(user) ;
     }
     
     @Override

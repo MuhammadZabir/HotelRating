@@ -1,10 +1,7 @@
-<%-- 
-    Document   : addUser
-    Created on : Jun 4, 2017, 10:33:09 AM
-    Author     : User
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page import="com.hotelrating.util.UserTypeEnum" %>
+<%@ page import="com.hotelrating.util.UserLocationEnum" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,65 +12,84 @@
         <title>Add User</title>
     </head>
     <body>
-         <nav class="navbar navbar-default">
-           
-         </nav>
-        <div class="col-md-3"></div>
-        <div class="container col-md-6" align="center">
-            <div class="panel panel-success">
-                
-                <div class="panel-heading text-center"><h3>ADD USER</h3></div>
-       
+        <% 
+                String messagePass = (String)request.getAttribute("messagePass") ;
+                String messageUser = (String)request.getAttribute("messageUser") ;
+        %>
+        <nav class="navbar navbar-default">
 
-         <div class="panel-body">
-        <input type="text" name="user_name" value="" size="50" placeholder="USER NAME"/></div>
-         
-          <div class="panel-body">
-         <input type="password" name="user_password" value="" size="50" placeholder="PASSWORD"/></div>
-                
-                 <div class="panel-body">
-         <input type="password" name="confom_password" value="" size="50" placeholder="CONFOMATION PASSWORD"/></div>
-         
-         <div class="panel-body">
-         <select name="user_type" >
-             <option>_______________________USER TYPE:-_________________________</option>
-                 <option value="Traveler" >Traveler</option>
-                 <option value="Family">Family</option>
-                 <option value="Business">Business</option>
-             </select>
-         </div>
-         
-          <div class="panel-body">
-         <input type="text" name="user_fullname" value="" size="50" placeholder="FULL NAME"/></div>
-         
-          <div class="panel-body">
-         <input type="text" name="user_age" value="" size="50" placeholder="AGE"/></div>
-         
-         
-         <div class="panel-body">
-          <select name="user_location">
-            <option>______________________Hotel Location:-_______________________</option>
-            <option value="Johor">Johor</option>
-            <option value="Melaka">Melaka</option>
-            <option value="Negeri Sembila">Negeri Sembilan</option>
-            <option value="Selangor">Selangor</option>
-            <option value="Kuala Lumpur">Kuala Lumpur</option>
-            <option value="Perak">Perak</option>
-            <option value="Kedah">Kedah</option>
-            <option value="Pulau Pinang">Pulau Pinang</option>
-            <option value="Perlis">Perlis</option>
-            <option value="Terengganu">Terengganu</option>
-            <option value="Kelantan">Kelantan</option>
-            <option value="Sabah">Sabah</option>
-            <option value="Sarawak">Sarawak</option>
-            <option value="Labuan">Labuan</option>
-        </select>
-         
-         </div>
-         
-        <input type="submit" value="Submit" name="submit" />
-        <input type="reset" value="Reset" name="reset" />
-        </div>
-        </div>
+        </nav>
+        <form:form action = "/HotelRating/register" method = "post" modelAttribute = "user">
+            <div class="col-md-3"></div>
+            <div class="container col-md-6" align="center">
+                <div class="panel panel-success">
+                    <div class="panel-heading text-center"><h3>ADD USER</h3></div>
+                    <div class="panel-body">
+                        <form:input path = "userName" size="50" placeholder="USER NAME"/>
+                        <%
+                            if (messageUser != null)
+                            {
+                        %>
+                                <div class="alert alert-warning">
+                                    <strong><%= messageUser %></strong>
+                                </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <div class="panel-body">
+                        <form:password path = "userPassword" size="50" placeholder="PASSWORD"/>
+                    </div>
+                    <div class="panel-body">
+                        <input type="password" name="confirmPassword" size="50" placeholder="CONFIRMATION PASSWORD"/>
+                        <%
+                            if (messagePass != null)
+                            {
+                        %>
+                                <div class="alert alert-warning">
+                                    <strong><%= messagePass %></strong>
+                                </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <div class="panel-body">
+                        <form:select path = "userType">
+                            <form:option value = "">_______________________USER TYPE:-_________________________</form:option>
+                            <form:option value = "<%=UserTypeEnum.Traveler.getValue()%>" >Traveler</form:option>
+                            <form:option value = "<%=UserTypeEnum.FAMILY.getValue()%>">Family</form:option>
+                            <form:option value = "<%=UserTypeEnum.BUSINESS.getValue()%>">Business</form:option>
+                        </form:select>
+                    </div>
+                    <div class="panel-body">
+                        <form:input path = "userFullname" size="50" placeholder="FULL NAME"/>
+                    </div>
+                    <div class="panel-body">
+                        <form:input onkeypress = "return event.charCode >= 48 && event.charCode <= 57" path = "userAge" size="50" placeholder="AGE"/>
+                    </div>
+                    <div class="panel-body">
+                        <form:select path = "userLocation">
+                            <form:option value = "">______________________Hotel Location:-_______________________</form:option>
+                            <form:option value = "<%=UserLocationEnum.JOHOR.getValue()%>">Johor</form:option>
+                            <form:option value = "<%=UserLocationEnum.MELAKA.getValue()%>">Melaka</form:option>
+                            <form:option value = "<%=UserLocationEnum.NEGERI_SEMBILAN.getValue()%>">Negeri Sembilan</form:option>
+                            <form:option value = "<%=UserLocationEnum.SELANGOR.getValue()%>">Selangor</form:option>
+                            <form:option value = "<%=UserLocationEnum.KUALA_LUMPUR.getValue()%>">Kuala Lumpur</form:option>
+                            <form:option value = "<%=UserLocationEnum.PERAK.getValue()%>">Perak</form:option>
+                            <form:option value = "<%=UserLocationEnum.KEDAH.getValue()%>">Kedah</form:option>
+                            <form:option value = "<%=UserLocationEnum.PULAU_PINANG.getValue()%>">Pulau Pinang</form:option>
+                            <form:option value = "<%=UserLocationEnum.PERLIS.getValue()%>">Perlis</form:option>
+                            <form:option value = "<%=UserLocationEnum.TERENGGANU.getValue()%>">Terengganu</form:option>
+                            <form:option value = "<%=UserLocationEnum.KELANTAN.getValue()%>">Kelantan</form:option>
+                            <form:option value = "<%=UserLocationEnum.SABAH.getValue()%>">Sabah</form:option>
+                            <form:option value = "<%=UserLocationEnum.SARAWAK.getValue()%>">Sarawak</form:option>
+                            <form:option value = "<%=UserLocationEnum.LABUAN.getValue()%>">Labuan</form:option>
+                      </form:select>
+                    </div>
+                    <button type="submit" class="btn">Submit</button>
+                    <input type="reset" class="btn" value="Reset" name="reset" />
+                </div>
+            </div>
+        </form:form>
     </body>
 </html>

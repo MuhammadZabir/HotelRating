@@ -49,7 +49,6 @@ public class IndexController
     public ModelAndView index(HttpSession session, HttpServletRequest request)
     {
         ModelAndView model = new ModelAndView() ;
-        model.addObject("user", new User()) ;
         User user = (User) session.getAttribute("loggedInUser") ;
         if (user != null)
         {
@@ -60,6 +59,7 @@ public class IndexController
         }
         else
         {
+            model.addObject("user", new User()) ;
             model.setViewName("login") ;
         }
         return model ;
@@ -120,10 +120,10 @@ public class IndexController
         return model ;
     }
     
-    @RequestMapping(value="/logout")
+    @RequestMapping(value = "/logout")
     public ModelAndView logout(HttpSession session)
     {
-        ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView() ;
         session.invalidate() ;
         model.setViewName("redirect:/") ;
         return model ;

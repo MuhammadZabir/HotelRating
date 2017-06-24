@@ -83,7 +83,7 @@ public class RatingDAOImpl implements RatingDAO
     {
         Session session = this.sessionFactory.getCurrentSession() ;
         Query query = session.createSQLQuery("SELECT COUNT(1) FROM rating where rating_user = :rating_user AND rating_hotel = :rating_hotel")
-                .setParameter("rating_user", hotelId).setParameter("rating_hotel", userId) ;
+                .setParameter("rating_user", userId).setParameter("rating_hotel", hotelId) ;
         List<BigInteger> results = query.list() ;
         
         return results.get(0).intValue() > 0 ;

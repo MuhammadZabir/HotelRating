@@ -45,7 +45,7 @@ public class Hotel implements Serializable {
     @Column(name = "hotel_id")
     private Long hotelId;
     @Size(max = 200)
-    @Column(name = "hotel_name")
+    @Column(name = "hotel_name", unique = true)
     private String hotelName;
     @Size(max = 200)
     @Column(name = "hotel_owner")

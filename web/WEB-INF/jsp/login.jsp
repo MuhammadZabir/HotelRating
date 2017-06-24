@@ -16,7 +16,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#"><h3>HOME</h3></a></li>
                         <li><a href="#"><h3>DASHBOARD</h3></a></li>
-                        <li><a href="#"><h3>SIGN UP / LOGIN</h3></a></li>
+                        <li><a href="/HotelRating/register"><h3>SIGN UP / LOGIN</h3></a></li>
                     </ul>
                 </div>
             </nav>
