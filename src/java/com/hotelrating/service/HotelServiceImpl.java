@@ -27,9 +27,9 @@ public class HotelServiceImpl implements HotelService
     
     @Override
     @Transactional
-    public void addHotel(Hotel hotel)
+    public Hotel addHotel(Hotel hotel)
     {
-        this.hotelDAO.addHotel(hotel) ;
+        return this.hotelDAO.addHotel(hotel) ;
     }
     
     @Override

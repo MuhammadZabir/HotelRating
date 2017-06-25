@@ -1,10 +1,6 @@
-<%-- 
-    Document   : hotelAdd
-    Created on : Jun 4, 2017, 9:19:19 AM
-    Author     : User
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page import="com.hotelrating.util.UserLocationEnum" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,66 +11,90 @@
         <title>Add Hotel</title>
     </head>
     <body>
-        
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                    </div>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><h3>HOME</h3></a></li>
-                        <li><a href="#"><h3>DASHBOARD</h3></a></li>
-                        <li><a href="#"><h3>ADD HOTEL</h3></a></li>
-                        <li><a href="#"><h3>LOG OUT</h3></a></li>
-                    </ul>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
                 </div>
-            </nav>
-        
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><h3>HOME</h3></a></li>
+                    <li><a href="#"><h3>DASHBOARD</h3></a></li>
+                    <li><a href="#"><h3>ADD HOTEL</h3></a></li>
+                    <li><a href="#"><h3>LOG OUT</h3></a></li>
+                </ul>
+            </div>
+        </nav>
+        <%
+            String fileMessage = (String) request.getAttribute("fileMessage") ;
+            String hotelMessage = (String) request.getAttribute("hotelMessage") ;
+            if (hotelMessage != null)
+            {        
+        %>
+                <div class="alert alert-warning">
+                    <strong><%= hotelMessage %></strong>
+                </div>
+        <%
+            }
+        %>
+        <form:form action = "/HotelRating/hotel" method = "post" enctype="multipart/form-data" modelAttribute = "hotel">
             <div class="col-md-3"></div>
             <div class="container col-md-6" align="center">
                 <div class="panel panel-success">
 
                     <div class="panel-heading text-center"><h3>ADD HOTEL</h3></div>
                     <div class="panel-body">
-                    <input type="text" name="hotel_name" value="" size="50" placeholder="Hotel Name"/></div>
-
-                     <div class="panel-body">
-                    <input type="text" name="hotel_owner" value="" size="50" placeholder="Hotel Owner"/></div>
+                        <form:input path = "hotelName" size="50" placeholder="Hotel Name"/>
+                    </div>
+                    <div class="panel-body">
+                        <form:input path = "hotelOwner" size="50" placeholder="Hotel Owner"/>
+                    </div>
+                    <div class="panel-body">
+                        <form:select path = "hotelLocation" width ="100">
+                            <form:option value = "">______________________Hotel Location:-_______________________</form:option>
+                                <form:option value = "<%=UserLocationEnum.JOHOR.getValue()%>">Johor</form:option>
+                                <form:option value = "<%=UserLocationEnum.MELAKA.getValue()%>">Melaka</form:option>
+                                <form:option value = "<%=UserLocationEnum.NEGERI_SEMBILAN.getValue()%>">Negeri Sembilan</form:option>
+                                <form:option value = "<%=UserLocationEnum.SELANGOR.getValue()%>">Selangor</form:option>
+                                <form:option value = "<%=UserLocationEnum.KUALA_LUMPUR.getValue()%>">Kuala Lumpur</form:option>
+                                <form:option value = "<%=UserLocationEnum.PERAK.getValue()%>">Perak</form:option>
+                                <form:option value = "<%=UserLocationEnum.KEDAH.getValue()%>">Kedah</form:option>
+                                <form:option value = "<%=UserLocationEnum.PULAU_PINANG.getValue()%>">Pulau Pinang</form:option>
+                                <form:option value = "<%=UserLocationEnum.PERLIS.getValue()%>">Perlis</form:option>
+                                <form:option value = "<%=UserLocationEnum.TERENGGANU.getValue()%>">Terengganu</form:option>
+                                <form:option value = "<%=UserLocationEnum.KELANTAN.getValue()%>">Kelantan</form:option>
+                                <form:option value = "<%=UserLocationEnum.SABAH.getValue()%>">Sabah</form:option>
+                                <form:option value = "<%=UserLocationEnum.SARAWAK.getValue()%>">Sarawak</form:option>
+                                <form:option value = "<%=UserLocationEnum.LABUAN.getValue()%>">Labuan</form:option>
+                        </form:select>
+                    </div>
 
                     <div class="panel-body">
-                    <select name="hotel_location" width ="100">
-                        <option>______________________Hotel Location:-_______________________</option>
-                        <option value="Johor" >Johor</option>
-                        <option value="Melaka">Melaka</option>
-                        <option value="Negeri Sembila">Negeri Sembilan</option>
-                        <option value="Selangor">Selangor</option>
-                        <option value="Kuala Lumpur">Kuala Lumpur</option>
-                        <option value="Perak">Perak</option>
-                        <option value="Kedah">Kedah</option>
-                        <option value="Pulau Pinang">Pulau Pinang</option>
-                        <option value="Perlis">Perlis</option>
-                        <option value="Terengganu">Terengganu</option>
-                        <option value="Kelantan">Kelantan</option>
-                        <option value="Sabah">Sabah</option>
-                        <option value="Sarawak">Sarawak</option>
-                        <option value="Labuan">Labuan</option>
-                    </select></div>
+                        <form:textarea path = "hotelDescription" rows="2" cols="40" placeholder="Description"/>
+                    </div>
+
+                    <div class="panel-body">Hotel Logo:
+                        <input type="file" name="file" value="" size="50" accept='image/*' placeholder="Hotel Logo"/>
+                    </div>
+
+                    <div class="panel-body">Hotel Gallery:
+                        <input type="file" name="imageHotel" value="" accept='image/*' size="50" multiple/>
+                        <%
+                            if (fileMessage != null)
+                            {
+                        %>
+                                <div class="alert alert-warning">
+                                    <strong><%= fileMessage %></strong>
+                                </div>
+                        <%       
+                            }
+                        %>
+                    </div>
 
                     <div class="panel-body">
-                    <textarea name="hotel_discription" rows="2" cols="40" placeholder="Description"></textarea></div>
-
-
-                     <div class="panel-body">Hotel Logo:
-                    <input type="file" name="hotel_main_image" value="" size="50" placeholder="Hotel Logo"/></div>
-
-                     <div class="panel-body">Hotel Gallery:
-                    <input type="file" name="image_hotel" value="" size="50"/></div>
-
-                     <div class="panel-body">
-                    <input type="text" name="image_url" value="" size="50" placeholder="Hotel URL"/></div>
-
-                     <div class="panel-body"><input type="submit" value="Submit" name="submit" />
-                    <input type="reset" value="Reset" name="reset" /> </div>
+                        <input type="submit" class = "btn" value="Submit" name="submit" />
+                        <input type="reset" class = "btn" value="Reset" name="reset" /> 
+                    </div>
                 </div>
             </div>
+        </form:form>
     </body>
 </html>

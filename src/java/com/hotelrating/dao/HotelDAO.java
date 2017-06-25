@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface HotelDAO 
 {
-    public void addHotel(Hotel hotel) ;
+    public Hotel addHotel(Hotel hotel) ;
     public void updateHotel(Hotel hotel) ;
     public List<Hotel> listHotels() ;
     public Hotel getHotelById(long id) ;

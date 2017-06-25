@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -39,11 +40,15 @@ public class HotelDAOImpl implements HotelDAO
     }
     
     @Override
-    public void addHotel(Hotel hotel)
+    public Hotel addHotel(Hotel hotel)
     {
         Session session = this.sessionFactory.getCurrentSession() ;
-        session.persist(hotel) ;
         logger.debug("Add hotel = {}", hotel) ;
+        session.persist(hotel) ;
+        Hotel result = (Hotel) session.createQuery("FROM Hotel WHERE hotelName = :hotelName")
+                              .setParameter("hotelName", hotel.getHotelName()).uniqueResult() ;
+        
+        return result ;  
     }
     
     @Override
