@@ -146,6 +146,12 @@ public class HotelController
                     {
                         byte[] bytes = image.getBytes() ;
                         String extension = image.getOriginalFilename().split("\\.")[1] ;
+                        if (!(extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("jpeg") || extension.equalsIgnoreCase("png") || extension.equalsIgnoreCase("bmp")))
+                        {
+                            request.setAttribute("fileMessage", "File image not supported. JPG, JPEG, PNG, BMP only.") ;
+                            model.setViewName("hotelAdd") ;
+                            return model ;
+                        }
                         String rootPath = request.getServletContext().getRealPath("/WEB-INF") ;
                         File dir = new File(rootPath + File.separator + "Images") ;
                         if (!dir.exists())
