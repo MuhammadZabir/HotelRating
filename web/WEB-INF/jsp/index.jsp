@@ -1,3 +1,4 @@
+<%@ page import="com.hotelrating.model.Hotel" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
@@ -68,7 +69,7 @@
                                     <table class="table table-striped table-hover">
                                         <thead class = "thead-inverse">
                                             <tr class="info">
-                                                <th>Hotel Name</th>
+                                                <th colspan = "2">Hotel Name</th>
                                                 <th>Hotel Owner</th>
                                                 <th>Hotel Location</th>
                                                 <th>Hotel Description</th>
@@ -78,6 +79,23 @@
                                         <tbody>
                                             <c:forEach items = "${hotels}" var = "hotel">
                                                 <tr bgcolor="#ffffff">
+                                                    <%
+                                                        Hotel hotel = (Hotel) pageContext.getAttribute("hotel") ;
+                                                        if (hotel.getHotelMainImage() != null)
+                                                        {
+                                                    %>
+                                                            <td>
+                                                                <img src="<c:url value='${hotel.hotelMainImage}'/>" class = "img-thumbnail img-responsive" width = "200"/>
+                                                            </td>
+                                                    <%
+                                                        }
+                                                        else
+                                                        {
+                                                    %>
+                                                            <td><span>No Display</span></td>
+                                                    <%
+                                                        }
+                                                    %>
                                                     <td>${hotel.hotelName}</td>
                                                     <td>${hotel.hotelOwner}</td>
                                                     <td>${hotel.hotelLocation}</td>

@@ -120,7 +120,7 @@ public class HotelController
                     return model ;
                 }
                 byte[] bytes = file.getBytes() ;
-                String rootPath = request.getServletContext().getRealPath("/WEB-INF") ;
+                String rootPath = request.getServletContext().getRealPath("/") ;
                 File dir = new File(rootPath + File.separator + "Images") ;
                 if (!dir.exists())
                     dir.mkdirs() ;
@@ -131,8 +131,8 @@ public class HotelController
                 stream.write(bytes) ;
                 stream.close() ;
                 hotelImage.setImageName(name) ;
-                hotelImage.setImageUrl(File.separator + "Images" + File.separator + name) ;
-                hotel.setHotelMainImage(File.separator + "Images" + File.separator + name) ;
+                hotelImage.setImageUrl("/Images/" + name) ;
+                hotel.setHotelMainImage("/Images/" + name) ;
                 hotelImage.setImageHotel(hotel) ;
                 hotelImages.add(hotelImage) ;
             }
@@ -152,7 +152,7 @@ public class HotelController
                             model.setViewName("hotelAdd") ;
                             return model ;
                         }
-                        String rootPath = request.getServletContext().getRealPath("/WEB-INF") ;
+                        String rootPath = request.getServletContext().getRealPath("/") ;
                         File dir = new File(rootPath + File.separator + "Images") ;
                         if (!dir.exists())
                             dir.mkdirs() ;
@@ -164,7 +164,7 @@ public class HotelController
                         count++ ;
                         HotelImage hotelImage = new HotelImage() ;
                         hotelImage.setImageName(name) ;
-                        hotelImage.setImageUrl(File.separator + "Images" + File.separator + name) ;
+                        hotelImage.setImageUrl("/Images/" + name) ;
                         hotelImage.setImageHotel(hotel) ;
                         hotelImages.add(hotelImage) ;
                     }

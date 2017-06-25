@@ -17,6 +17,7 @@
     <resources mapping="/css/**" location="/WEB-INF/css/" />
     <resources mapping="/fonts/**" location="/WEB-INF/fonts/" />
     <resources mapping="/js/**" location="/WEB-INF/js/" />
+    <resources mapping="/Images/**" location="/Images/" />
     
     <interceptors>
         <beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
