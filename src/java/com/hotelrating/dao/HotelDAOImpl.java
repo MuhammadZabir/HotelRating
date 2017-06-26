@@ -93,6 +93,7 @@ public class HotelDAOImpl implements HotelDAO
         List<Hotel> hotels = null;
         Session session = this.sessionFactory.getCurrentSession() ;
         Criteria criteria = getCriteria(session) ;
+        criteria.addOrder(Order.desc("hotelRatingOverall")) ;
         ScrollableResults scrollableResults = criteria.scroll() ;
         scrollableResults.last() ;
         scrollableResults.close() ;
@@ -111,6 +112,7 @@ public class HotelDAOImpl implements HotelDAO
         Criteria criteria = getCriteria(session) ;
         criteria.add(Restrictions.sqlRestriction("MATCH({alias}.hotel_name) AGAINST('*" +
                                                   search + "*' IN BOOLEAN MODE)")) ;
+        criteria.addOrder(Order.desc("hotelRatingOverall")) ;
         ScrollableResults scrollableResults = criteria.scroll() ;
         scrollableResults.last() ;
         scrollableResults.close() ;
@@ -153,7 +155,6 @@ public class HotelDAOImpl implements HotelDAO
                 .add(Projections.property("hotelMainImage"), "hotelMainImage")
                 .add(Projections.property("hotelRatingOverall"), "hotelRatingOverall"))
                 .setResultTransformer(Transformers.aliasToBean(Hotel.class)) ;
-        criteria.addOrder(Order.asc("hotelId"));
         return criteria;
     }
 }
