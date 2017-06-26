@@ -76,6 +76,7 @@
                                                 <th>Hotel Location</th>
                                                 <th>Hotel Star</th>
                                                 <th>Hotel Description</th>
+                                                <th>Hotel Rating</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -114,6 +115,7 @@
                                                     %>
                                                     <td>${hotel.hotelStar}</td>
                                                     <td>${hotel.hotelDescription}</td>
+                                                    <td>${hotel.hotelRatingOverall}</td>
                                                     <td><a class = "btn" href="/HotelRating/rating/${hotel.hotelId}">Rate Us!</a></td>
                                                 </tr>
                                             </c:forEach>
