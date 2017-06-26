@@ -69,12 +69,12 @@
                     
                     <div class="panel-body">
                         <form:select path = "hotelStar">
-                            <form:option class = "text-center" value = "">Hotel Star</form:option>
-                            <form:option class = "text-center" value = "1">1</form:option>
-                            <form:option class = "text-center" value = "2">2</form:option>
-                            <form:option class = "text-center" value = "3">3</form:option>
-                            <form:option class = "text-center" value = "4">4</form:option>
-                            <form:option class = "text-center" value = "5">5</form:option>
+                            <form:option value = "0">Hotel Star</form:option>
+                            <form:option value = "1">1</form:option>
+                            <form:option value = "2">2</form:option>
+                            <form:option value = "3">3</form:option>
+                            <form:option value = "4">4</form:option>
+                            <form:option value = "5">5</form:option>
                         </form:select>
                     </div>
 

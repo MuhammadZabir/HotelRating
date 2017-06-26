@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Hotel.findByHotelOwner", query = "SELECT h FROM Hotel h WHERE h.hotelOwner = :hotelOwner"),
     @NamedQuery(name = "Hotel.findByHotelLocation", query = "SELECT h FROM Hotel h WHERE h.hotelLocation = :hotelLocation"),
     @NamedQuery(name = "Hotel.findByHotelStar", query = "SELECT h FROM Hotel h WHERE h.hotelStar = :hotelStar"),
-    @NamedQuery(name = "Hotel.findByHotelDescription", query = "SELECT h FROM Hotel h WHERE h.hotelDescription = :hotelDescription"),
     @NamedQuery(name = "Hotel.findByHotelRatingOverall", query = "SELECT h FROM Hotel h WHERE h.hotelRatingOverall = :hotelRatingOverall")})
 public class Hotel implements Serializable {
 
