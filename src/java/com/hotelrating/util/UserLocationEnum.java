@@ -11,19 +11,27 @@ package com.hotelrating.util;
  */
 public enum UserLocationEnum 
 {
-    JOHOR(1), MELAKA(2), NEGERI_SEMBILAN(3), SELANGOR(4), KUALA_LUMPUR(5), PERAK(6),
-    KEDAH(7), PULAU_PINANG(8), PERLIS(9), TERENGGANU(10), KELANTAN(11), SABAH(12),
-    SARAWAK(13), LABUAN(14) ;
+    JOHOR(1, "Johor"), MELAKA(2, "Melaka"), NEGERI_SEMBILAN(3, "Negeri Sembilan"),
+    SELANGOR(4, "Selangor"), KUALA_LUMPUR(5, "Kuala Lumpur"), PERAK(6, "Perak"),
+    KEDAH(7, "Kedah"), PULAU_PINANG(8, "Pulau Pinang"), PERLIS(9, "Perlis"), TERENGGANU(10, "Terengganu"),
+    KELANTAN(11, "Kelantan"), SABAH(12, "Sabah"), SARAWAK(13, "Sarawak"), LABUAN(14, "Labuan") ;
     
     private final int value ;
+    private final String name ;
     
-    private UserLocationEnum(int value)
+    private UserLocationEnum(int value, String name)
     {
         this.value = value ;
+        this.name = name ;
     }
     
     public int getValue()
     {
         return this.value ;
+    }
+    
+    public String getName()
+    {
+        return this.name ;
     }
 }

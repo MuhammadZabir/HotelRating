@@ -1,4 +1,5 @@
 <%@ page import="com.hotelrating.model.Hotel" %>
+<%@ page import="com.hotelrating.util.UserLocationEnum" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
@@ -99,7 +100,17 @@
                                                     %>
                                                     <td>${hotel.hotelName}</td>
                                                     <td>${hotel.hotelOwner}</td>
-                                                    <td>${hotel.hotelLocation}</td>
+                                                    <%
+                                                        for (UserLocationEnum userLocation : UserLocationEnum.values())
+                                                        {
+                                                            if (hotel.getHotelLocation().equals(String.valueOf(userLocation.getValue())))
+                                                            {
+                                                    %>
+                                                                <td><%=userLocation.getName()%></td>
+                                                    <%
+                                                            }
+                                                        }
+                                                    %>
                                                     <td>${hotel.hotelDescription}</td>
                                                     <td><a class = "btn" href="/HotelRating/rating/${hotel.hotelId}">Rate Us!</a></td>
                                                 </tr>
