@@ -80,4 +80,11 @@ public class HotelServiceImpl implements HotelService
     {
         return this.hotelDAO.searchCountHotels(search) ;
     }
+    
+    @Override
+    @Transactional
+    public List<Hotel> searchHotelsPage(String search, int page, int size)
+    {
+        return this.hotelDAO.searchHotelsPage(search, page, size) ;
+    }
 }

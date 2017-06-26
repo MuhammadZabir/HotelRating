@@ -107,7 +107,7 @@ public class IndexController
     }
     
     @RequestMapping(value="/index/{page}", method = RequestMethod.GET)
-    public ModelAndView allIndexPage(HttpServletRequest request, HttpServletResponse response, @PathVariable("page") int page)
+    public ModelAndView allIndexPage(HttpServletRequest request, @PathVariable("page") int page)
     {
         ModelAndView model = new ModelAndView() ;
         int currentPage = page - 1 ;
@@ -126,6 +126,20 @@ public class IndexController
         ModelAndView model = new ModelAndView() ;
         session.invalidate() ;
         model.setViewName("redirect:/") ;
+        return model ;
+    }
+    
+    @RequestMapping(value = "/search/{search}&{page}", method = RequestMethod.GET)
+    public ModelAndView searchIndexPage(HttpServletRequest request, @PathVariable("search") String search, @PathVariable("page") int page)
+    {
+        ModelAndView model = new ModelAndView() ;
+        int currentPage = page - 1 ;
+        int totalCount = this.hotelService.searchCountHotels(search) ;
+        double pages = Math.ceil((double) totalCount / 10.0) ;
+        request.setAttribute("paging", (int) pages) ;
+        request.setAttribute("active", page) ;
+        model.addObject("hotels", this.hotelService.searchHotelsPage(search, currentPage, 10)) ;
+        model.setViewName("index") ;
         return model ;
     }
     

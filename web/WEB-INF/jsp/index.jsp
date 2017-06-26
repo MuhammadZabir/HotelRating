@@ -54,8 +54,8 @@
                     <div class="hidden-xs hidden-md hidden-lg"><br></div>
                     <div class="row">
                         <div class = "col-md-2"></div>
-                        <div class = "col-md-6"><input type="text" name="user_name" value="" size="30" class="form-control"></div>
-                        <div class = "col-md-2"><input type="submit" value="Search" name="submit" class="btn btn-success"></div>
+                        <div class = "col-md-6"><input type="text" id = "searchValue" name="searchValue" value="" size="30" class="form-control"></div>
+                        <div class = "col-md-2"><a onclick = "this.href='/HotelRating/search/' + document.getElementById('searchValue').value + '&1'" class = "btn btn-success">Search</a></div>
                         <div class = "col-md-2"></div>
                     </div>
                     <br/>
@@ -116,13 +116,13 @@
                                                 if (active == x)
                                                 {
                                     %>
-                                                    <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
+                                                    <li class="active"><a class = "nav-link active" href="/HotelRating/search/<%=search%>&<%=x%>"><%=x%></a></li>
                                     <%
                                                 }
                                                 else
                                                 {
                                     %>
-                                                    <li><a class = "nav-link" href="/HotelRating/index/<%=x%>&<%=search%>"><%=x%></a></li>
+                                                    <li><a class = "nav-link" href="/HotelRating/search/<%=search%>&<%=x%>"><%=x%></a></li>
                                     <%
                                                 }
                                             }

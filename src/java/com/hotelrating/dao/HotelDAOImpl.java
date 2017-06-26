@@ -109,8 +109,8 @@ public class HotelDAOImpl implements HotelDAO
         List<Hotel> hotels = null ;
         Session session = this.sessionFactory.getCurrentSession() ;
         Criteria criteria = getCriteria(session) ;
-        criteria.add(Restrictions.sqlRestriction("MATCH({alias}.hotel_name) AGAINST('" +
-                                                  search + "' IN BOOLEAN MODE)")) ;
+        criteria.add(Restrictions.sqlRestriction("MATCH({alias}.hotel_name) AGAINST('*" +
+                                                  search + "*' IN BOOLEAN MODE)")) ;
         ScrollableResults scrollableResults = criteria.scroll() ;
         scrollableResults.last() ;
         scrollableResults.close() ;
@@ -135,8 +135,7 @@ public class HotelDAOImpl implements HotelDAO
     {
         Session session = this.sessionFactory.getCurrentSession() ;
         logger.debug("Get list of Hotel") ;
-        BigInteger result = (BigInteger) session.createSQLQuery("SELECT COUNT(*) FROM hotel WHERE MATCH(hotel_name) AGAINST(':search' IN BOOLEAN MODE)")
-               .setString("search", search).uniqueResult() ;
+        BigInteger result = (BigInteger) session.createSQLQuery("SELECT COUNT(*) FROM hotel WHERE MATCH(hotel_name) AGAINST('*" + search + "*' IN BOOLEAN MODE)").uniqueResult() ;
         return result.intValue() ;
     }
     
