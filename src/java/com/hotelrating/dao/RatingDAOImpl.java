@@ -7,6 +7,7 @@ package com.hotelrating.dao;
 
 import com.hotelrating.model.Rating;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import static org.springframework.transaction.annotation.Propagation.REQUIRED;
 
 /**
  *
@@ -103,6 +103,17 @@ public class RatingDAOImpl implements RatingDAO
             rate = rating ;
         }
         
+        return rate ;
+    }
+    
+    @Override
+    public List<Rating> getAllByHotelId(long hotelId)
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        List<Rating> rate = new ArrayList<>() ;
+        Query query = session.createQuery("FROM Rating WHERE ratingHotel.hotelId = :ratingHotel")
+                             .setParameter("ratingHotel", hotelId) ;
+        rate = query.list() ;
         return rate ;
     }
 }

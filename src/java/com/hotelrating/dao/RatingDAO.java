@@ -21,4 +21,5 @@ public interface RatingDAO
     public void deleteRating(long id) ;
     public boolean validateExistance(long hotelId, long userId) ;
     public Rating getRatingByHotelAndUser(long hotelId, long userId) ;
+    public List<Rating> getAllByHotelId(long hotelId) ;
 }

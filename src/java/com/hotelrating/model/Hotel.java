@@ -35,7 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Hotel.findByHotelId", query = "SELECT h FROM Hotel h WHERE h.hotelId = :hotelId"),
     @NamedQuery(name = "Hotel.findByHotelName", query = "SELECT h FROM Hotel h WHERE h.hotelName = :hotelName"),
     @NamedQuery(name = "Hotel.findByHotelOwner", query = "SELECT h FROM Hotel h WHERE h.hotelOwner = :hotelOwner"),
-    @NamedQuery(name = "Hotel.findByHotelLocation", query = "SELECT h FROM Hotel h WHERE h.hotelLocation = :hotelLocation")})
+    @NamedQuery(name = "Hotel.findByHotelLocation", query = "SELECT h FROM Hotel h WHERE h.hotelLocation = :hotelLocation"),
+    @NamedQuery(name = "Hotel.findByHotelStar", query = "SELECT h FROM Hotel h WHERE h.hotelStar = :hotelStar"),
+    @NamedQuery(name = "Hotel.findByHotelDescription", query = "SELECT h FROM Hotel h WHERE h.hotelDescription = :hotelDescription"),
+    @NamedQuery(name = "Hotel.findByHotelRatingOverall", query = "SELECT h FROM Hotel h WHERE h.hotelRatingOverall = :hotelRatingOverall")})
 public class Hotel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +56,8 @@ public class Hotel implements Serializable {
     @Size(max = 200)
     @Column(name = "hotel_location")
     private String hotelLocation;
+    @Column(name = "hotel_star")
+    private int hotelStar;
     @Lob
     @Size(max = 2147483647)
     @Column(name = "hotel_description")
@@ -61,6 +66,8 @@ public class Hotel implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "hotel_main_image")
     private String hotelMainImage;
+    @Column(name = "hotel_rating_overall")
+    private double hotelRatingOverall;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "imageHotel")
     private Collection<HotelImage> hotelImageCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ratingHotel")
@@ -104,6 +111,14 @@ public class Hotel implements Serializable {
     public void setHotelLocation(String hotelLocation) {
         this.hotelLocation = hotelLocation;
     }
+    
+    public int getHotelStar() {
+        return hotelStar;
+    }
+    
+    public void setHotelStar(int hotelStar) {
+        this.hotelStar = hotelStar;
+    }
 
     public String getHotelDescription() {
         return hotelDescription;
@@ -119,6 +134,14 @@ public class Hotel implements Serializable {
 
     public void setHotelMainImage(String hotelMainImage) {
         this.hotelMainImage = hotelMainImage;
+    }
+    
+    public double getHotelRatingOverall() {
+        return hotelRatingOverall;
+    }
+    
+    public void setHotelRatingOverall(double hotelRatingOverall) {
+        this.hotelRatingOverall = hotelRatingOverall;
     }
 
     @XmlTransient

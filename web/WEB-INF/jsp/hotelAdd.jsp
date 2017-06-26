@@ -66,6 +66,17 @@
                                 <form:option value = "<%=UserLocationEnum.LABUAN.getValue()%>">Labuan</form:option>
                         </form:select>
                     </div>
+                    
+                    <div class="panel-body">
+                        <form:select path = "hotelStar">
+                            <form:option class = "text-center" value = "">Hotel Star</form:option>
+                            <form:option class = "text-center" value = "1">1</form:option>
+                            <form:option class = "text-center" value = "2">2</form:option>
+                            <form:option class = "text-center" value = "3">3</form:option>
+                            <form:option class = "text-center" value = "4">4</form:option>
+                            <form:option class = "text-center" value = "5">5</form:option>
+                        </form:select>
+                    </div>
 
                     <div class="panel-body">
                         <form:textarea path = "hotelDescription" rows="2" cols="40" placeholder="Description"/>

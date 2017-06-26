@@ -10,6 +10,9 @@ import com.hotelrating.model.Rating;
 import com.hotelrating.model.User;
 import com.hotelrating.service.HotelService;
 import com.hotelrating.service.RatingService;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -59,8 +62,9 @@ public class RatingController
     public ModelAndView addOrUpdateRating(HttpSession session, HttpServletRequest request, @ModelAttribute("rating") Rating rating)
     {
         ModelAndView model = new ModelAndView();
+        Hotel hotel = (Hotel) request.getSession().getAttribute("hotel") ;
         rating.setRatingUser((User) session.getAttribute("loggedInUser")) ;
-        rating.setRatingHotel((Hotel) request.getSession().getAttribute("hotel"));
+        rating.setRatingHotel(hotel);
         if (rating.getRatingId() == null)
         {
             this.ratingService.addRating(rating) ;
@@ -69,6 +73,19 @@ public class RatingController
         {
             this.ratingService.updateRating(rating) ;
         }
+        
+        List<Rating> rates = this.ratingService.getAllByHotelId(hotel.getHotelId()) ;
+        int overall = 0 ;
+        for (Rating rate : rates)
+        {
+            overall = overall + rate.getRatingRate() ;
+        }
+        
+        DecimalFormat df = new DecimalFormat("#.#") ;
+        df.setRoundingMode(RoundingMode.CEILING) ;
+        double average = Double.parseDouble(df.format(overall / rates.size())) ;
+        hotel.setHotelRatingOverall(average) ;
+        this.hotelService.updateHotel(hotel) ;
         model.setViewName("redirect:/index/1") ;
         return model ;
     }

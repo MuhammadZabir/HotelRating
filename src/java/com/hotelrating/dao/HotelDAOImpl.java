@@ -148,6 +148,7 @@ public class HotelDAOImpl implements HotelDAO
                 .add(Projections.property("hotelName"), "hotelName")
                 .add(Projections.property("hotelOwner"), "hotelOwner")
                 .add(Projections.property("hotelLocation"), "hotelLocation")
+                .add(Projections.property("hotelStar"), "hotelStar")
                 .add(Projections.property("hotelDescription"), "hotelDescription")
                 .add(Projections.property("hotelMainImage"), "hotelMainImage"))
                 .setResultTransformer(Transformers.aliasToBean(Hotel.class)) ;

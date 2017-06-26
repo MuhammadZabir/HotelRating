@@ -73,4 +73,11 @@ public class RatingServiceImpl implements RatingService
     {
         return this.ratingDAO.getRatingByHotelAndUser(hotelId, userId) ;
     }
+    
+    @Override
+    @Transactional
+    public List<Rating> getAllByHotelId(long hotelId)
+    {
+        return this.ratingDAO.getAllByHotelId(hotelId ) ;
+    }
 }

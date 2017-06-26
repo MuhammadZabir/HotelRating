@@ -74,6 +74,7 @@
                                                 <th>Hotel Name</th>
                                                 <th>Hotel Owner</th>
                                                 <th>Hotel Location</th>
+                                                <th>Hotel Star</th>
                                                 <th>Hotel Description</th>
                                                 <th></th>
                                             </tr>
@@ -111,6 +112,7 @@
                                                             }
                                                         }
                                                     %>
+                                                    <td>${hotel.hotelStar}</td>
                                                     <td>${hotel.hotelDescription}</td>
                                                     <td><a class = "btn" href="/HotelRating/rating/${hotel.hotelId}">Rate Us!</a></td>
                                                 </tr>

@@ -29,10 +29,19 @@ CREATE TABLE `hotel` (
   `hotel_name` varchar(200) DEFAULT NULL,
   `hotel_owner` varchar(200) DEFAULT NULL,
   `hotel_location` varchar(200) DEFAULT NULL,
+  `hotel_star` int(11) DEFAULT NULL,
   `hotel_description` longtext,
   `hotel_main_image` longtext,
-  PRIMARY KEY (`hotel_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `hotel_rating_overall` double DEFAULT NULL,
+  PRIMARY KEY (`hotel_id`),
+  UNIQUE KEY `hotel_name_UNIQUE` (`hotel_name`),
+  FULLTEXT KEY `hotel_name` (`hotel_name`),
+  FULLTEXT KEY `hotel_description` (`hotel_description`),
+  FULLTEXT KEY `hotel_description_2` (`hotel_description`),
+  FULLTEXT KEY `hotel_name_2` (`hotel_name`,`hotel_description`),
+  FULLTEXT KEY `hotel_name_3` (`hotel_name`,`hotel_description`),
+  FULLTEXT KEY `hotel_name_4` (`hotel_name`,`hotel_description`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +59,7 @@ CREATE TABLE `hotel_image` (
   PRIMARY KEY (`image_id`),
   KEY `image_hotel_idx` (`image_hotel`),
   CONSTRAINT `image_hotel` FOREIGN KEY (`image_hotel`) REFERENCES `hotel` (`hotel_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +80,7 @@ CREATE TABLE `rating` (
   KEY `rating_hotel_idx` (`rating_hotel`),
   CONSTRAINT `rating_hotel` FOREIGN KEY (`rating_hotel`) REFERENCES `hotel` (`hotel_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `rating_user` FOREIGN KEY (`rating_user`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,8 +99,9 @@ CREATE TABLE `user` (
   `user_fullname` varchar(200) DEFAULT NULL,
   `user_age` int(11) DEFAULT NULL,
   `user_location` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -103,4 +113,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-28 10:55:32
+-- Dump completed on 2017-06-26 23:15:53
