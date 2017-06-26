@@ -13,15 +13,14 @@ These project uses mainly
 Technology
 - Java Programming Language
 - JSP
-- Framework
 - Hibernate
 - Spring MVC
 - MySQL
 
 Software
-- Netbeans
+- Netbeans IDE
 - GlassFish Web Server
 		
-P/S : Can still be export to other IDEs just export it out from netbeans.
+P/S : Can still be export to other IDEs just export it out from netbeans. (src & web is the important component)
 
 Cheers!!!!

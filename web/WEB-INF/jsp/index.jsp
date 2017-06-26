@@ -69,7 +69,8 @@
                                     <table class="table table-striped table-hover">
                                         <thead class = "thead-inverse">
                                             <tr class="info">
-                                                <th colspan = "2">Hotel Name</th>
+                                                <th></th>
+                                                <th>Hotel Name</th>
                                                 <th>Hotel Owner</th>
                                                 <th>Hotel Location</th>
                                                 <th>Hotel Description</th>
