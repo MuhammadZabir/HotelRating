@@ -26,6 +26,7 @@
                 </div>
         </nav>
         <form:form action="/HotelRating/rating/add" method = "post" modelAttribute="rating">
+            <form:hidden path = "ratingId"/>
             <div class = "container-fluid">
                 <div class = "row">
                     <div class = "col-md-4">
