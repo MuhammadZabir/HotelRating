@@ -23,5 +23,5 @@ public interface HotelService
     public int countHotels() ;
     public int searchCountHotels(String search) ;
     public List<Hotel> searchHotelsPage(String search, int page, int size) ;
-    
+    public Object[] latestRating() ;
 }

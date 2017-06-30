@@ -23,4 +23,5 @@ public interface HotelDAO
     public List<Hotel> searchHotelsPage(String search, int page, int size) ;
     public int countHotels() ;
     public int searchCountHotels(String search) ;
+    public Object[] latestRating() ;
 }

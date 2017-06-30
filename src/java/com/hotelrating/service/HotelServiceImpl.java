@@ -87,4 +87,11 @@ public class HotelServiceImpl implements HotelService
     {
         return this.hotelDAO.searchHotelsPage(search, page, size) ;
     }
+    
+    @Override
+    @Transactional
+    public Object[] latestRating()
+    {
+        return this.hotelDAO.latestRating() ;
+    }
 }

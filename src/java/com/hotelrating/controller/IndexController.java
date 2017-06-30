@@ -7,6 +7,7 @@ package com.hotelrating.controller;
 
 import com.hotelrating.model.User;
 import com.hotelrating.service.HotelService;
+import com.hotelrating.service.RatingService;
 import com.hotelrating.service.UserService;
 import com.hotelrating.util.UserRoleEnum;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ public class IndexController
 {
     private UserService userService ;
     private HotelService hotelService ;
+    private RatingService ratingService ;
     
     @Autowired(required = true)
     @Qualifier(value = "userService")
@@ -45,6 +47,13 @@ public class IndexController
         this.hotelService = hotelService ;
     }
     
+    @Autowired(required = true)
+    @Qualifier(value = "ratingService")
+    public void setRatingService(RatingService ratingService)
+    {
+        this.ratingService = ratingService ;
+    }
+    
     @RequestMapping(value = "/")
     public ModelAndView index(HttpSession session, HttpServletRequest request)
     {
@@ -55,7 +64,7 @@ public class IndexController
             if (user.getUserRole() == UserRoleEnum.User.getValue())
                 model.setViewName("redirect:/index/1") ;
             else
-                model.setViewName("indexAdmin") ;
+                model.setViewName("redirect:/indexAdmin") ;
         }
         else
         {
@@ -87,7 +96,7 @@ public class IndexController
                 }
                 else
                 {
-                    model.setViewName("indexAdmin") ;
+                    model.setViewName("redirect:/indexAdmin") ;
                 }
             }
             else
@@ -117,6 +126,16 @@ public class IndexController
         request.setAttribute("active", page) ;
         model.addObject("hotels", this.hotelService.listHotelsPage(currentPage, 10)) ;
         model.setViewName("index") ;
+        return model ;
+    }
+    
+    @RequestMapping(value="/indexAdmin")
+    public ModelAndView IndexAdminPage(HttpServletRequest request)
+    {
+        ModelAndView model = new ModelAndView() ;
+        model.addObject("total", this.ratingService.getTotalCount()) ;
+        model.addObject("objects", this.ratingService.getCountByLocation()) ;
+        model.setViewName("indexAdmin") ;
         return model ;
     }
     

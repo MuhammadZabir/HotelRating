@@ -5,7 +5,9 @@
  */
 package com.hotelrating.dao;
 
+import com.hotelrating.model.CountLocation;
 import com.hotelrating.model.Rating;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,5 +117,51 @@ public class RatingDAOImpl implements RatingDAO
                              .setParameter("ratingHotel", hotelId) ;
         rate = query.list() ;
         return rate ;
+    }
+    
+    @Override
+    public List<CountLocation> getCountByLocation()
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        Object[] object = (Object[]) session.createSQLQuery("SELECT SUM(CASE WHEN u.user_location = 1 THEN 1 ELSE 0 END) AS Johor," +
+                                                 "SUM(CASE WHEN u.user_location = 2 THEN 1 ELSE 0 END) AS Melaka," +
+                                                 "SUM(CASE WHEN u.user_location = 3 THEN 1 ELSE 0 END) AS 'Negeri Sembilan'," +
+                                                 "SUM(CASE WHEN u.user_location = 4 THEN 1 ELSE 0 END) AS Selangor," +
+                                                 "SUM(CASE WHEN u.user_location = 5 THEN 1 ELSE 0 END) AS 'Kuala Lumpur'," +
+                                                 "SUM(CASE WHEN u.user_location = 6 THEN 1 ELSE 0 END) AS Perak," +
+                                                 "SUM(CASE WHEN u.user_location = 7 THEN 1 ELSE 0 END) AS Kedah," +
+                                                 "SUM(CASE WHEN u.user_location = 8 THEN 1 ELSE 0 END) AS 'Pulau Pinang'," +
+                                                 "SUM(CASE WHEN u.user_location = 9 THEN 1 ELSE 0 END) AS Perlis," +
+                                                 "SUM(CASE WHEN u.user_location = 10 THEN 1 ELSE 0 END) AS Terengganu," +
+                                                 "SUM(CASE WHEN u.user_location = 11 THEN 1 ELSE 0 END) AS Kelantan," +
+                                                 "SUM(CASE WHEN u.user_location = 12 THEN 1 ELSE 0 END) AS Sabah," +
+                                                 "SUM(CASE WHEN u.user_location = 13 THEN 1 ELSE 0 END) AS Sarawak," +
+                                                 "SUM(CASE WHEN u.user_location = 14 THEN 1 ELSE 0 END) AS Labuan " +
+                                                 "FROM rating r JOIN user u ON r.rating_user = u.user_id ;").uniqueResult() ;
+        
+        List<CountLocation> result = new ArrayList<>() ;
+        result.add(new CountLocation("Johor", ((BigDecimal) object[0]).intValue())) ;
+        result.add(new CountLocation("Melaka", ((BigDecimal) object[1]).intValue())) ;
+        result.add(new CountLocation("Negeri Sembilan", ((BigDecimal) object[2]).intValue())) ;
+        result.add(new CountLocation("Selangor", ((BigDecimal) object[3]).intValue())) ;
+        result.add(new CountLocation("Kuala Lumpur", ((BigDecimal) object[4]).intValue())) ;
+        result.add(new CountLocation("Perak", ((BigDecimal) object[5]).intValue())) ;
+        result.add(new CountLocation("Kedah", ((BigDecimal) object[6]).intValue())) ;
+        result.add(new CountLocation("Pulau Pinang", ((BigDecimal) object[7]).intValue())) ;
+        result.add(new CountLocation("Perlis", ((BigDecimal) object[8]).intValue())) ;
+        result.add(new CountLocation("Terengganu", ((BigDecimal) object[9]).intValue())) ;
+        result.add(new CountLocation("Kelantan", ((BigDecimal) object[10]).intValue())) ;
+        result.add(new CountLocation("Sabah", ((BigDecimal) object[11]).intValue())) ;
+        result.add(new CountLocation("Sarawak", ((BigDecimal) object[12]).intValue())) ;
+        result.add(new CountLocation("Labuan", ((BigDecimal) object[13]).intValue())) ;
+        
+        return result ;
+    }
+    
+    @Override
+    public int getTotalCount()
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        return (int) ((BigInteger) session.createSQLQuery("SELECT COUNT(*) FROM rating").uniqueResult()).intValue() ;
     }
 }

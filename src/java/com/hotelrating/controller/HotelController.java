@@ -195,45 +195,7 @@ public class HotelController
             return model ;
         }
     }
+   
     
-    /**
-    * Upload multiple file using Spring Controller
-    */
-    @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
-    public @ResponseBody String uploadMultipleFileHandler(HttpServletRequest request, @RequestParam("name") String[] names,
-            @RequestParam("file") MultipartFile[] files) {
-
-        if (files.length != names.length)
-                return "Mandatory information missing";
-
-        String message = "";
-        for (int i = 0; i < files.length; i++) {
-            MultipartFile file = files[i];
-            String name = names[i];
-            try {
-                byte[] bytes = file.getBytes();
-
-                // Creating the directory to store file
-                ServletContext sc = request.getServletContext() ;
-                String rootPath = sc.getRealPath("/something");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                        dir.mkdirs();
-
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                                + File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                                new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                message = message + "You successfully uploaded file=" + name
-                                + "";
-            } catch (Exception e) {
-                    return "You failed to upload " + name + " => " + e.getMessage();
-            }
-        }
-        return message;
-      }
+    
 }

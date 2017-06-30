@@ -6,6 +6,7 @@
 package com.hotelrating.service;
 
 import com.hotelrating.dao.RatingDAO;
+import com.hotelrating.model.CountLocation;
 import com.hotelrating.model.Rating;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -79,5 +80,19 @@ public class RatingServiceImpl implements RatingService
     public List<Rating> getAllByHotelId(long hotelId)
     {
         return this.ratingDAO.getAllByHotelId(hotelId ) ;
+    }
+    
+    @Override
+    @Transactional
+    public List<CountLocation> getCountByLocation()
+    {
+        return this.ratingDAO.getCountByLocation() ;
+    }
+    
+    @Override
+    @Transactional
+    public int getTotalCount()
+    {
+        return this.ratingDAO.getTotalCount() ;
     }
 }

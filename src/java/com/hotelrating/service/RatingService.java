@@ -5,6 +5,7 @@
  */
 package com.hotelrating.service;
 
+import com.hotelrating.model.CountLocation;
 import com.hotelrating.model.Rating;
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface RatingService
     public boolean validateExistance(long hotelId, long userId) ;
     public Rating getRatingByHotelAndUser(long hotelId, long userId) ;
     public List<Rating> getAllByHotelId(long hotelId) ;
+    public List<CountLocation> getCountByLocation() ;
+    public int getTotalCount() ;
 }

@@ -141,6 +141,19 @@ public class HotelDAOImpl implements HotelDAO
         return result.intValue() ;
     }
     
+    @Override
+    public Object[] latestRating()
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        Object[] result = (Object[]) session.createSQLQuery("SELECT SUM(CASE WHEN hotel_rating_overall = 5 THEN 1 ELSE 0 END) AS Rating5," +
+                               "SUM(CASE WHEN hotel_rating_overall BETWEEN 4 AND 4.9 THEN 1 ELSE 0 END) AS Rating4," +
+                               "SUM(CASE WHEN hotel_rating_overall BETWEEN 3 AND 3.9 THEN 1 ELSE 0 END) AS Rating3," +
+                               "SUM(CASE WHEN hotel_rating_overall BETWEEN 2 AND 2.9 THEN 1 ELSE 0 END) AS Rating2," +
+                               "SUM(CASE WHEN hotel_rating_overall BETWEEN 1 AND 1.9 THEN 1 ELSE 0 END) AS Rating1" +
+                               "FROM hotel ;").uniqueResult();
+        return result ;
+    }
+    
     private static Criteria getCriteria(Session session) 
     {
         Criteria criteria = session.createCriteria(Hotel.class);
