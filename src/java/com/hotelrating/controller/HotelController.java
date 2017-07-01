@@ -155,7 +155,7 @@ public class HotelController
                     this.hotelImageService.addHotelImage(hotelImage) ;
                 }
             }
-            model.setViewName("redirect:/rating/" + hotel.getHotelId()) ;
+            model.setViewName("redirect:/hotelDash/" + hotel.getHotelId()) ;
             return model ;
         }
         catch (IOException e)
@@ -183,6 +183,7 @@ public class HotelController
             return model ;
         }
         model.addObject("hotel", this.hotelService.getHotelById(id)) ;
+        model.addObject("images", this.hotelImageService.getAllImagesByHotel(id)) ;
         model.addObject("ratingCount", this.ratingService.getCountRatingByHotel(id)) ;
         model.addObject("ratingType", this.ratingService.getCountRatingByType(id)) ;
         model.setViewName("hotelDash") ;

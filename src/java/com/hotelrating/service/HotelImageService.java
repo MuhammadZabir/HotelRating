@@ -19,4 +19,5 @@ public interface HotelImageService
     public List<HotelImage> listHotelImages() ;
     public HotelImage getHotelImageById(long id) ;
     public void deleteHotelImage(long id) ;
+    public List<String> getAllImagesByHotel(long hotelId) ;
 }

@@ -8,6 +8,7 @@ package com.hotelrating.controller;
 import com.hotelrating.model.Hotel;
 import com.hotelrating.model.Rating;
 import com.hotelrating.model.User;
+import com.hotelrating.service.HotelImageService;
 import com.hotelrating.service.HotelService;
 import com.hotelrating.service.RatingService;
 import java.math.RoundingMode;
@@ -35,6 +36,7 @@ public class RatingController
 {
     private RatingService ratingService ;
     private HotelService hotelService ;
+    private HotelImageService hotelImageService ;
     
     @Autowired(required = true)
     @Qualifier(value = "ratingService")
@@ -48,6 +50,13 @@ public class RatingController
     public void setHotelService(HotelService hotelService)
     {
         this.hotelService = hotelService ;
+    }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "hotelImageService")
+    public void setHotelImageService(HotelImageService hotelImageService)
+    {
+        this.hotelImageService = hotelImageService ;
     }
     
     @RequestMapping(value = "/rating/add", method = RequestMethod.POST)
@@ -93,6 +102,7 @@ public class RatingController
         }
         User user = (User) session.getAttribute("loggedInUser") ;
         request.setAttribute("hotel", this.hotelService.getHotelById(id)) ;
+        model.addObject("images", this.hotelImageService.getAllImagesByHotel(id)) ;
         if (this.ratingService.validateExistance(id, user.getUserId()))
         {
             model.addObject("rating", this.ratingService.getRatingByHotelAndUser(id, user.getUserId())) ;

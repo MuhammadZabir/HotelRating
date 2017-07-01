@@ -118,7 +118,7 @@
                                                     <td>${hotel.hotelStar}</td>
                                                     <td>${hotel.hotelDescription}</td>
                                                     <td>${hotel.hotelRatingOverall}</td>
-                                                    <td><a class = "btn" href="/HotelRating/hotelDash/${hotel.hotelId}">Overrall</a></td>
+                                                    <td><a class = "btn" href="/HotelRating/hotelDash/${hotel.hotelId}">Overall</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -148,13 +148,13 @@
                                                 if (active == x)
                                                 {
                                     %>
-                                                    <li class="active"><a class = "nav-link active" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
+                                                    <li class="active"><a class = "nav-link active" href="/HotelRating/hotelList/<%=x%>"><%=x%></a></li>
                                     <%
                                                 }
                                                 else
                                                 {
                                     %>
-                                                    <li><a class = "nav-link" href="/HotelRating/index/<%=x%>"><%=x%></a></li>
+                                                    <li><a class = "nav-link" href="/HotelRating/hotelList/<%=x%>"><%=x%></a></li>
                                     <%
                                                 }
                                             }

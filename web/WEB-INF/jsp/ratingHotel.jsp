@@ -1,6 +1,7 @@
 <%@ page import="com.hotelrating.util.UserLocationEnum" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.hotelrating.model.Hotel" %>
 <!DOCTYPE html>
 <html>
@@ -86,8 +87,18 @@
                                                 </tr>
                                             
                                         </tbody>
-    </table>
-            
+        </table>
+        <table>
+            <tr>
+                <c:if test = "${images != null}">
+                    <c:forEach items = "${images}" var = "image">
+                        <td>
+                            <img src = "<c:url value = '${image}'/>" class = "img-thumbnail img-responsive" width = "200"/>
+                        </td>
+                    </c:forEach>
+                </c:if>
+            </tr>
+        </table>
             <div class = "container-fluid">
                 <div class = "row">
                     <div class = "col-md-4">

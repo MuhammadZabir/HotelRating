@@ -169,20 +169,35 @@ public class RatingDAOImpl implements RatingDAO
     public List<CountLocation> getCountRatingByHotel(long hotelId)
     {
         Session session = this.sessionFactory.getCurrentSession() ;
-        Object[] object = (Object[]) session.createSQLQuery("SELECT SUM(CASE WHEN rating_rate = 5 THEN 1 ELSE 0 END) AS Best," +
+        Object[] object = null ;
+        List<CountLocation> result = null;
+        try 
+        {
+            object = (Object[]) session.createSQLQuery("SELECT SUM(CASE WHEN rating_rate = 5 THEN 1 ELSE 0 END) AS Best," +
                                                             "SUM(CASE WHEN rating_rate BETWEEN 4 AND 4.9 THEN 1 ELSE 0 END) AS Good," +
                                                             "SUM(CASE WHEN rating_rate BETWEEN 3 AND 3.9 THEN 1 ELSE 0 END) AS Average," +
                                                             "SUM(CASE WHEN rating_rate BETWEEN 2 AND 2.9 THEN 1 ELSE 0 END) AS Bad," +
                                                             "SUM(CASE WHEN rating_rate BETWEEN 1 AND 1.9 THEN 1 ELSE 0 END) AS Worst " +
                                                             "FROM rating WHERE rating_hotel = :hotelId")
                                                             .setParameter("hotelId", hotelId).uniqueResult() ;
-        List<CountLocation> result = new ArrayList<>() ;
-        result.add(new CountLocation("Best", ((BigDecimal) object[0]).intValue())) ;
-        result.add(new CountLocation("Good", ((BigDecimal) object[1]).intValue())) ;
-        result.add(new CountLocation("Average", ((BigDecimal) object[2]).intValue())) ;
-        result.add(new CountLocation("Bad", ((BigDecimal) object[3]).intValue())) ;
-        result.add(new CountLocation("Worst", ((BigDecimal) object[4]).intValue())) ;
+ 
+            result = new ArrayList<>() ;
+            result.add(new CountLocation("Best", ((BigDecimal) object[0]).intValue())) ;
+            result.add(new CountLocation("Good", ((BigDecimal) object[1]).intValue())) ;
+            result.add(new CountLocation("Average", ((BigDecimal) object[2]).intValue())) ;
+            result.add(new CountLocation("Bad", ((BigDecimal) object[3]).intValue())) ;
+            result.add(new CountLocation("Worst", ((BigDecimal) object[4]).intValue())) ;
+        }
         
+        catch (NullPointerException e)
+        {
+            result = new ArrayList<>() ;
+            result.add(new CountLocation("Best", 0)) ;
+            result.add(new CountLocation("Good", 0)) ;
+            result.add(new CountLocation("Average", 0)) ;
+            result.add(new CountLocation("Bad", 0)) ;
+            result.add(new CountLocation("Worst", 0)) ;
+        }
         return result ;
     }
     
@@ -198,17 +213,30 @@ public class RatingDAOImpl implements RatingDAO
     public List<CountLocation> getCountRatingByType(long hotelId)
     {
         Session session = this.sessionFactory.getCurrentSession() ;
-        Object[] object = (Object[]) session.createSQLQuery("SELECT SUM(CASE WHEN u.user_type = 1 THEN 1 ELSE 0 END) AS Traveler," +
+        Object[] object = null ;
+        List<CountLocation> result = null;
+        try 
+        {
+            object = (Object[]) session.createSQLQuery("SELECT SUM(CASE WHEN u.user_type = 1 THEN 1 ELSE 0 END) AS Traveler," +
                                                             "SUM(CASE WHEN u.user_type = 2 THEN 1 ELSE 0 END) AS Family," +
                                                             "SUM(CASE WHEN u.user_type = 3 THEN 1 ELSE 0 END) AS Business " +
                                                             "FROM rating r JOIN user u ON r.rating_user = u.user_id " +
                                                             "WHERE rating_hotel = :hotelId")
                                                             .setParameter("hotelId", hotelId)
                                                             .uniqueResult() ;
-        List<CountLocation> result = new ArrayList<>() ;
-        result.add(new CountLocation("Traveler", ((BigDecimal) object[0]).intValue())) ;
-        result.add(new CountLocation("Family", ((BigDecimal) object[1]).intValue())) ;
-        result.add(new CountLocation("Business", ((BigDecimal) object[2]).intValue())) ;
+            result = new ArrayList<>() ;
+            result.add(new CountLocation("Traveler", ((BigDecimal) object[0]).intValue())) ;
+            result.add(new CountLocation("Family", ((BigDecimal) object[1]).intValue())) ;
+            result.add(new CountLocation("Business", ((BigDecimal) object[2]).intValue())) ;   
+        }
+        
+        catch (NullPointerException e)
+        {
+            result = new ArrayList<>() ;
+            result.add(new CountLocation("Traveler", 0)) ;
+            result.add(new CountLocation("Family", 0)) ;
+            result.add(new CountLocation("Business", 0)) ;
+        }
         return result ;
     }
 }

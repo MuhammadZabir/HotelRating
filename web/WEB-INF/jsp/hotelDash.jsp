@@ -96,36 +96,41 @@
                                                     <td>${hotel.hotelDescription}</td>
                                                     <td>${hotel.hotelRatingOverall}</td>
                                                   
-                                                </tr>
-                                            
+                                                </tr>                                    
                                         </tbody>
-    </table>
-                                                    
-            <div class="jumbotron">
-                <div class="container-fluid">
-
-                    <table table-bordered >
-                        <tr>
-                            <td> <h2>Reviews</h2></td>
-                            <td> <h2>User Type</h2></td>
-                        </tr>
-                        <tr>
-                            <c:forEach items = "${ratingCount}" var = "count">
-                                <input id = "${count.locationName}" type = "hidden" value = "${count.locationCount}"/>
-                            </c:forEach>
-                            <c:forEach items = "${ratingType}" var = "type">
-                                <input id ="${type.locationName}" type = "hidden" value = "${type.locationCount}"/>
-                            </c:forEach>
-                            <td><div class="col-md-4"><div id="chart"></div></div></td>
-                            <td class="col-md-4"><canvas id="pie" width="650" height="350"></canvas></td>
-                        </tr>
-
-
-                    </table>
-
-
-                </div>
+                                        
+        </table>
+        <table>
+            <tr>
+                <c:if test = "${images != null}">
+                    <c:forEach items = "${images}" var = "image">
+                        <td>
+                            <img src = "<c:url value = '${image}'/>" class = "img-thumbnail img-responsive" width = "200"/>
+                        </td>
+                    </c:forEach>
+                </c:if>
+            </tr>
+        </table>
+        <div class="jumbotron">
+            <div class="container-fluid">
+                <table table-bordered >
+                    <tr>
+                        <td> <h2>Reviews</h2></td>
+                        <td> <h2>User Type</h2></td>
+                    </tr>
+                    <tr>
+                        <c:forEach items = "${ratingCount}" var = "count">
+                            <input id = "${count.locationName}" type = "hidden" value = "${count.locationCount}"/>
+                        </c:forEach>
+                        <c:forEach items = "${ratingType}" var = "type">
+                            <input id ="${type.locationName}" type = "hidden" value = "${type.locationCount}"/>
+                        </c:forEach>
+                        <td><div class="col-md-4"><div id="chart"></div></div></td>
+                        <td class="col-md-4"><canvas id="pie" width="650" height="350"></canvas></td>
+                    </tr>
+                </table>
             </div>
+        </div>
     </body>
 </html>
 <link rel="stylesheet" href="/HotelRating/css/chart.css" type="text/css">

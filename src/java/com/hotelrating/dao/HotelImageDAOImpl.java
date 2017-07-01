@@ -6,10 +6,10 @@
 package com.hotelrating.dao;
 
 import com.hotelrating.model.HotelImage;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,5 +74,25 @@ public class HotelImageDAOImpl implements HotelImageDAO
             session.delete(hotelImage) ;
         }
         logger.debug("HotelImage deleted = {}", hotelImage) ;
+    }
+    
+    @Override
+    public List<String> getAllImagesByHotel(long hotelId)
+    {
+        Session session = this.sessionFactory.getCurrentSession() ;
+        List<Object[]> hotelImages = (List<Object[]>) session.createSQLQuery("SELECT * FROM hotel_image WHERE image_hotel = :hotelId")
+                           .setParameter("hotelId", hotelId).list() ;
+        if (hotelImages == null)
+        {
+            return null ;
+        }
+        List<String> result = new ArrayList<>() ;
+        for (Object[] hotelImage : hotelImages)
+        {
+            result.add((String) hotelImage[3]) ;
+        }
+        
+        return result ;
+        
     }
 }

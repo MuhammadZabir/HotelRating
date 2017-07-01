@@ -59,4 +59,11 @@ public class HotelImageServiceImpl implements HotelImageService
     {
         this.hotelImageDAO.deleteHotelImage(id) ;
     }
+    
+    @Override
+    @Transactional
+    public List<String> getAllImagesByHotel(long hotelId)
+    {
+        return this.hotelImageDAO.getAllImagesByHotel(hotelId) ;
+    }
 }

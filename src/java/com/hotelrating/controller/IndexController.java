@@ -6,6 +6,7 @@
 package com.hotelrating.controller;
 
 import com.hotelrating.model.User;
+import com.hotelrating.service.HotelImageService;
 import com.hotelrating.service.HotelService;
 import com.hotelrating.service.RatingService;
 import com.hotelrating.service.UserService;
