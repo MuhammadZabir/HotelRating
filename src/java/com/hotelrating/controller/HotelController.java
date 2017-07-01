@@ -7,15 +7,16 @@ package com.hotelrating.controller;
 
 import com.hotelrating.model.Hotel;
 import com.hotelrating.model.HotelImage;
+import com.hotelrating.model.User;
 import com.hotelrating.service.HotelImageService;
 import com.hotelrating.service.HotelService;
+import com.hotelrating.service.RatingService;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.hibernate.exception.ConstraintViolationException;
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,6 +41,7 @@ public class HotelController
 {
     private HotelService hotelService ;
     private HotelImageService hotelImageService ;
+    private RatingService ratingService ;
     
     @Autowired(required = true)
     @Qualifier(value = "hotelService")
@@ -56,46 +57,22 @@ public class HotelController
         this.hotelImageService = hotelImageService ;
     }
     
-    @RequestMapping(value = "/hotels")
-    public String listHotels(HttpServletRequest request, HttpSession session, Model model)
+    @Autowired(required = true)
+    @Qualifier(value = "ratingService")
+    public void setRatingService(RatingService ratingService)
     {
-        model.addAttribute("listHotels", this.hotelService.listHotels()) ;
-        return "hotel" ;
-    }
-    
-    @RequestMapping(value = "/hotel/add", method = RequestMethod.POST)
-    public String addOrUpdateHotel(@ModelAttribute("hotel") Hotel hotel)
-    {
-        if (hotel.getHotelId() == 0)
-        {
-            this.hotelService.addHotel(hotel) ;
-        }
-        else
-        {
-            this.hotelService.updateHotel(hotel) ;
-        }
-        return "redirect:/hotels" ;
-    }
-    
-    @RequestMapping(value = "/hotel/remove/{id}")
-    public String deleteHotel(@PathVariable long id)
-    {
-        this.hotelService.deleteHotel(id) ;
-        return "redirect:/hotels" ;
-    }
-    
-    @RequestMapping(value = "/hotel/edit/{id}")
-    public String updateHotel(@PathVariable long id, Model model)
-    {
-        model.addAttribute("hotel", this.hotelService.getHotelById(id)) ;
-        model.addAttribute("listHotels", this.hotelService.listHotels()) ;
-        return "hotel" ;
+        this.ratingService = ratingService ;
     }
     
     @RequestMapping(value = "/hotel")
-    public ModelAndView hotel()
+    public ModelAndView hotel(HttpSession session)
     {
         ModelAndView model = new ModelAndView() ;
+        if (!validateSession(session))
+        {
+            model.setViewName("redirect:/") ;
+            return model ;
+        }
         model.addObject("hotel", new Hotel()) ;
         model.setViewName("hotelAdd") ;
         return model ;
@@ -195,7 +172,26 @@ public class HotelController
             return model ;
         }
     }
-   
     
+    @RequestMapping(value = "/hotelDash/{id}", method = RequestMethod.GET)
+    public ModelAndView hotelDash(HttpSession session, HttpServletRequest request, @PathVariable("id") long id)
+    {
+        ModelAndView model = new ModelAndView() ;
+        if (!validateSession(session))
+        {
+            model.setViewName("redirect:/") ;
+            return model ;
+        }
+        model.addObject("hotel", this.hotelService.getHotelById(id)) ;
+        model.addObject("ratingCount", this.ratingService.getCountRatingByHotel(id)) ;
+        model.addObject("ratingType", this.ratingService.getCountRatingByType(id)) ;
+        model.setViewName("hotelDash") ;
+        return model ;
+    }
     
+    private boolean validateSession(HttpSession session)
+    {
+        User user = (User) session.getAttribute("loggedInUser") ;
+        return user != null ;
+    }
 }

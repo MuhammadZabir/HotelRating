@@ -45,7 +45,7 @@
                                 <div class="navbar-header">
                                 </div>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="#"><h3>HOME</h3></a></li>
+                                        <li><a href="/HotelRating/"><h3>HOME</h3></a></li>
                                         <li><a href="/HotelRating/logout"><h3>LOGOUT</h3></a></li>
                                     </ul>
                                 </div>

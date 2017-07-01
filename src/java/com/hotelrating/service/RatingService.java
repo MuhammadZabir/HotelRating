@@ -25,4 +25,7 @@ public interface RatingService
     public List<Rating> getAllByHotelId(long hotelId) ;
     public List<CountLocation> getCountByLocation() ;
     public int getTotalCount() ;
+    public List<CountLocation> getCountRatingByHotel(long hotelId) ;
+    public int getTotalCountRatingByHotel(long hotelId) ;
+    public List<CountLocation> getCountRatingByType(long hotelId) ;
 }

@@ -7,7 +7,9 @@ package com.hotelrating.controller;
 
 import com.hotelrating.model.Hotel;
 import com.hotelrating.model.HotelImage;
+import com.hotelrating.model.User;
 import com.hotelrating.service.HotelImageService;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -33,40 +35,9 @@ public class HotelImageController
         this.hotelImageService = hotelImageService ;
     }
     
-    @RequestMapping(value = "/hotelImages", method = RequestMethod.GET)
-    public String listHotelImages(Model model)
+    private boolean validateSession(HttpSession session)
     {
-        model.addAttribute("hotelImage", new Hotel()) ;
-        model.addAttribute("listHotelImages", this.hotelImageService.listHotelImages()) ;
-        return "hotelImage" ;
-    }
-    
-    @RequestMapping(value = "/hotelImage/add", method = RequestMethod.POST)
-    public String addOrUpdateHotelImage(@ModelAttribute("hotelImage") HotelImage hotelImage)
-    {
-        if (hotelImage.getImageId() == 0)
-        {
-            this.hotelImageService.addHotelImage(hotelImage) ;
-        }
-        else
-        {
-            this.hotelImageService.updateHotelImage(hotelImage) ;
-        }
-        return "redirect:/hotelImages" ;
-    }
-    
-    @RequestMapping(value = "/hotelImage/remove/{id}")
-    public String deleteHotelImage(@PathVariable long id)
-    {
-        this.hotelImageService.deleteHotelImage(id) ;
-        return "redirect:/hotels" ;
-    }
-    
-    @RequestMapping(value = "/hotelImage/edit/{id}")
-    public String updateHotelImage(@PathVariable long id, Model model)
-    {
-        model.addAttribute("hotelImage", this.hotelImageService.getHotelImageById(id)) ;
-        model.addAttribute("listHotelImages", this.hotelImageService.listHotelImages()) ;
-        return "hotelImage" ;
+        User user = (User) session.getAttribute("loggedInUser") ;
+        return user != null ;
     }
 }

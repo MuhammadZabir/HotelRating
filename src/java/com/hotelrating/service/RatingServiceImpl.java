@@ -95,4 +95,25 @@ public class RatingServiceImpl implements RatingService
     {
         return this.ratingDAO.getTotalCount() ;
     }
+    
+    @Override
+    @Transactional
+    public List<CountLocation> getCountRatingByHotel(long hotelId)
+    {
+        return this.ratingDAO.getCountRatingByHotel(hotelId) ;
+    }
+    
+    @Override
+    @Transactional
+    public int getTotalCountRatingByHotel(long hotelId)
+    {
+        return this.ratingDAO.getTotalCountRatingByHotel(hotelId) ;
+    }
+    
+    @Override
+    @Transactional
+    public List<CountLocation> getCountRatingByType(long hotelId)
+    {
+        return this.ratingDAO.getCountRatingByType(hotelId) ;
+    }
 }

@@ -65,10 +65,14 @@ var degreeToRadians = function(angle) {
   return angle * Math.PI / 180
 }
 
+var traveler = parseInt($("#Traveler").val()) ;
+var family = parseInt($("#Family").val()) ;
+var business = parseInt($("#Business").val()) ;
+
 var data = [
-  { label: 'Traveler', value: 90 },
-  { label: 'Family', value: 150 },
-  { label: 'Business', value: 80 }
+  { label: 'Traveler', value: traveler },
+  { label: 'Family', value: family },
+  { label: 'Business', value: business }
       
 ];
 var colors = [ '#39CCCC', '#85144B', '#00008B' ];
@@ -80,11 +84,17 @@ drawPieChart(data, colors);
 
 //doughnut chart 
 $(function(){
+  var best = parseInt($("#Best").val()) ;
+  var good = parseInt($("#Good").val()) ;
+  var average = parseInt($("#Average").val()) ;
+  var bad = parseInt($("#Bad").val()) ;
+  var worst = parseInt($("#Worst").val()) ;
   $("#chart").drawDoughnutChart([
-    { title: "A", value : 120,  color: "#3AB189" },
-    { title: "B", value:  80,   color: "#F6504E" },
-    { title: "C", value:  70,   color: "#587AC6" },
-    { title: "D", value : 50,   color: "#6DBBED" }
+    { title: "Best", value : best, color: "#3AB189" },
+    { title: "Good", value:  good, color: "#F6504E" },
+    { title: "Average", value:  average, color: "#587AC6" },
+    { title: "Bad", value : bad, color: "#6DBBED" },
+    { title: "Worst", value : worst, color: "blue" }
   ], {
     baseColor: '#FFF',
     baseOffset: 0,

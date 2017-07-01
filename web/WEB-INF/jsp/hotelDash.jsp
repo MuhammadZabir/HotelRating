@@ -27,8 +27,8 @@
                 <div class="navbar-header">
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/HotelRating/indexAdmin"><h3>DASHBOARD</h3></a></li>
-                    <li><a href="/HotelRating/hotelList"><h3>LIST HOTEL</h3></a></li>
+                    <li><a href="/HotelRating/"><h3>DASHBOARD</h3></a></li>
+                    <li><a href="/HotelRating/hotelList/1"><h3>LIST HOTEL</h3></a></li>
                     <li><a href="/HotelRating/hotel"><h3>ADD HOTEL</h3></a></li>
                     <li><a href="/HotelRating/logout"><h3>LOG OUT</h3></a></li>
                 </ul>
@@ -108,12 +108,16 @@
                         <tr>
                             <td> <h2>Reviews</h2></td>
                             <td> <h2>User Type</h2></td>
-                            <td> <h2>Ranking</h2></td>
                         </tr>
-                         <tr>
-                             <td><div class="col-md-4"><div id="chart"></div></div></td>
+                        <tr>
+                            <c:forEach items = "${ratingCount}" var = "count">
+                                <input id = "${count.locationName}" type = "hidden" value = "${count.locationCount}"/>
+                            </c:forEach>
+                            <c:forEach items = "${ratingType}" var = "type">
+                                <input id ="${type.locationName}" type = "hidden" value = "${type.locationCount}"/>
+                            </c:forEach>
+                            <td><div class="col-md-4"><div id="chart"></div></div></td>
                             <td class="col-md-4"><canvas id="pie" width="650" height="350"></canvas></td>
-                            <td class="col-md-4"><h1>#30</h1></td> 
                         </tr>
 
 

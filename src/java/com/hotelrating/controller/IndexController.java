@@ -58,19 +58,17 @@ public class IndexController
     public ModelAndView index(HttpSession session, HttpServletRequest request)
     {
         ModelAndView model = new ModelAndView() ;
-        User user = (User) session.getAttribute("loggedInUser") ;
-        if (user != null)
-        {
-            if (user.getUserRole() == UserRoleEnum.User.getValue())
-                model.setViewName("redirect:/index/1") ;
-            else
-                model.setViewName("redirect:/indexAdmin") ;
-        }
-        else
+        if (!validateSession(session))
         {
             model.addObject("user", new User()) ;
             model.setViewName("login") ;
+            return model ;
         }
+        User user = (User) session.getAttribute("loggedInUser") ;
+        if (user.getUserRole() == UserRoleEnum.User.getValue())
+            model.setViewName("redirect:/index/1") ;
+        else
+            model.setViewName("redirect:/indexAdmin") ;
         return model ;
     }
     
@@ -116,9 +114,14 @@ public class IndexController
     }
     
     @RequestMapping(value="/index/{page}", method = RequestMethod.GET)
-    public ModelAndView allIndexPage(HttpServletRequest request, @PathVariable("page") int page)
+    public ModelAndView allIndexPage(HttpSession session, HttpServletRequest request, @PathVariable("page") int page)
     {
         ModelAndView model = new ModelAndView() ;
+        if (!validateSession(session))
+        {
+            model.setViewName("redirect:/") ;
+            return model ;
+        }
         int currentPage = page - 1 ;
         int totalCount = this.hotelService.countHotels() ;
         double pages = Math.ceil((double) totalCount / 10.0) ;
@@ -130,9 +133,14 @@ public class IndexController
     }
     
     @RequestMapping(value="/indexAdmin")
-    public ModelAndView IndexAdminPage(HttpServletRequest request)
+    public ModelAndView IndexAdminPage(HttpSession session, HttpServletRequest request)
     {
         ModelAndView model = new ModelAndView() ;
+        if (!validateSession(session))
+        {
+            model.setViewName("redirect:/") ;
+            return model ;
+        }
         model.addObject("total", this.ratingService.getTotalCount()) ;
         model.addObject("objects", this.ratingService.getCountByLocation()) ;
         model.setViewName("indexAdmin") ;
@@ -149,17 +157,50 @@ public class IndexController
     }
     
     @RequestMapping(value = "/search/{search}&{page}", method = RequestMethod.GET)
-    public ModelAndView searchIndexPage(HttpServletRequest request, @PathVariable("search") String search, @PathVariable("page") int page)
+    public ModelAndView searchIndexPage(HttpSession session, HttpServletRequest request, @PathVariable("search") String search, @PathVariable("page") int page)
     {
         ModelAndView model = new ModelAndView() ;
+        if (!validateSession(session))
+        {
+            model.setViewName("redirect:/") ;
+            return model ;
+        }
+        User user = (User) session.getAttribute("loggedInUser") ;
         int currentPage = page - 1 ;
         int totalCount = this.hotelService.searchCountHotels(search) ;
         double pages = Math.ceil((double) totalCount / 10.0) ;
         request.setAttribute("paging", (int) pages) ;
         request.setAttribute("active", page) ;
         model.addObject("hotels", this.hotelService.searchHotelsPage(search, currentPage, 10)) ;
-        model.setViewName("index") ;
+        if (user.getUserRole() == UserRoleEnum.User.getValue())
+            model.setViewName("index") ;
+        else
+            model.setViewName("indexAdmin") ;
         return model ;
     }
     
+    @RequestMapping(value = "/hotelList/{page}")
+    public ModelAndView hotelListAdmin(HttpSession session, HttpServletRequest request, @PathVariable("page") int page)
+    {
+        ModelAndView model = new ModelAndView() ;
+        if (!validateSession(session))
+        {
+            model.setViewName("redirect:/") ;
+            return model ;
+        }
+        int currentPage = page - 1 ;
+        int totalCount = this.hotelService.countHotels() ;
+        double pages = Math.ceil((double) totalCount / 10.0) ;
+        request.setAttribute("paging", (int) pages) ;
+        request.setAttribute("active", page) ;
+        model.addObject("hotels", this.hotelService.listHotelsPage(currentPage, 10)) ;
+        model.setViewName("hotelList") ;
+        return model ;
+    }
+    
+    private boolean validateSession(HttpSession session)
+    {
+        User user = (User) session.getAttribute("loggedInUser") ;
+        return user != null ;
+    }
 }

@@ -37,46 +37,6 @@ public class UserController
         this.userService = userService ;
     }
     
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String listHotels(Model model)
-    {
-        model.addAttribute("user", new User()) ;
-        model.addAttribute("userlists", this.userService.listUsers()) ;
-        return "user" ;
-    }
-    
-    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
-    public String addOrUpdateUser(@ModelAttribute("user") User user)
-    {
-        if (user.getUserId() != 0)
-        {
-            this.userService.addUser(user) ;
-        }
-        
-        else
-        {
-            this.userService.updateUser(user) ;
-        }
-        
-        return "redirect:/users" ;
-    }
-    
-    @RequestMapping(value = "/user/remove/{id}")
-    public String deleteUser(@PathVariable long id)
-    {
-        this.userService.deleteUser(id) ;
-        return "redirect:/users" ;
-    }
-    
-    @RequestMapping(value = "/user/edit/{id}")
-    public String updateUser(@PathVariable long id, Model model)
-    {
-        model.addAttribute("user", this.userService.getUserById(id)) ;
-        model.addAttribute("userlists", this.userService.listUsers()) ;
-        
-        return "user" ;
-    }
-    
     @RequestMapping(value = "/register")
     public ModelAndView toRegister()
     {
@@ -110,5 +70,11 @@ public class UserController
             model.setViewName("addUser") ;
             return model;
         }
+    }
+    
+    private boolean validateSession(HttpSession session)
+    {
+        User user = (User) session.getAttribute("loggedInUser") ;
+        return user != null ;
     }
 }

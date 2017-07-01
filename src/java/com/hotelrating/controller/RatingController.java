@@ -50,14 +50,6 @@ public class RatingController
         this.hotelService = hotelService ;
     }
     
-    @RequestMapping(value = "/ratings", method = RequestMethod.GET)
-    public String listRatings(Model model)
-    {
-        model.addAttribute("rating", new Rating()) ;
-        model.addAttribute("listRatings", this.ratingService.listRatings()) ;
-        return "rating" ;
-    }
-    
     @RequestMapping(value = "/rating/add", method = RequestMethod.POST)
     public ModelAndView addOrUpdateRating(HttpSession session, HttpServletRequest request, @ModelAttribute("rating") Rating rating)
     {
@@ -90,25 +82,15 @@ public class RatingController
         return model ;
     }
     
-    @RequestMapping(value = "/rating/remove/{id}")
-    public String deleteRating(@PathVariable long id)
-    {
-        this.ratingService.deleteRating(id) ;
-        return "redirect:/ratings" ;
-    }
-    
-    @RequestMapping(value = "/rating/edit/{id}")
-    public String updateRating(@PathVariable long id, Model model)
-    {
-        model.addAttribute("rating", this.ratingService.getRatingById(id)) ;
-        model.addAttribute("listRatings", this.ratingService.listRatings()) ;
-        return "rating" ;
-    }
-    
     @RequestMapping(value = "/rating/{id}", method = RequestMethod.GET)
     public ModelAndView viewRateForm(HttpSession session, HttpServletRequest request, HttpServletResponse response, @PathVariable long id) 
     {
         ModelAndView model = new ModelAndView() ;
+        if (!validateSession(session))
+        {
+            model.setViewName("redirect:/") ;
+            return model ;
+        }
         User user = (User) session.getAttribute("loggedInUser") ;
         request.setAttribute("hotel", this.hotelService.getHotelById(id)) ;
         if (this.ratingService.validateExistance(id, user.getUserId()))
@@ -124,4 +106,9 @@ public class RatingController
         return model ;
     }
     
+    private boolean validateSession(HttpSession session)
+    {
+        User user = (User) session.getAttribute("loggedInUser") ;
+        return user != null ;
+    }
 }
