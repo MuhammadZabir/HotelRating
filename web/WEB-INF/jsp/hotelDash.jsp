@@ -129,4 +129,4 @@
     </body>
 </html>
 <link rel="stylesheet" href="/HotelRating/css/chart.css" type="text/css">
-<script src="/HotelRating/js/chart.js"></script>
+<script src="/HotelRating/js/pie.js"></script>

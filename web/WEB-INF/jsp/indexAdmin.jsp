@@ -54,7 +54,7 @@
                                     <span><fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/>%</span><br/> 
                                   </div>
                                 </div>
-                                    <span style = "color:gray">${object.locationName} (${(object.locationCount / total) * 100} %)</span>
+                                    <span style = "color:gray">${object.locationName} <br/>(<fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/> %)</span>
                               </div>
                         </c:forEach> 
                         <div class="col-md-10"><br></div>
