@@ -13,6 +13,21 @@
         <script src="/HotelRating/js/bootstrap.min.js"></script>  
     </head>
     <body>
+        <style>
+            html,
+            body,
+            .fullImage{
+                height: 100%;
+            }
+            
+            .fullImage{
+                background: url('/HotelRating/Images/bg.jpg');
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>  
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -35,14 +50,18 @@
                             <h2>Percentage Customers Per State</h2>
                             
                             <c:forEach items = "${objects}" var = "object">
+                                
                                 <div class="progress-bar">
+                                    
                                     <div class="progress-track">
                                       
                                       <div class="progress-fill">
                                         <span><fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/>%</span><br/> 
                                       </div>
+                                      
                                     </div>
-                                      <span style = "color:red">${object.locationName}</span>
+                                        
+                                        <span style = "color:gray">${object.locationName} (${(object.locationCount / total) * 100} %)</span>
                                   </div>
                                   
                             </c:forEach> 

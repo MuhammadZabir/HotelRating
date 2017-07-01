@@ -15,6 +15,21 @@
         <title>Dashboard</title>
     </head>
     <body background="http://wallpapercave.com/wp/2u5OrmL.png">
+        <style>
+            html,
+            body,
+            .fullImage{
+                height: 100%;
+            }
+            
+            .fullImage{
+                background: url('/HotelRating/Images/bg.jpg');
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>  
         <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
