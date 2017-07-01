@@ -400,7 +400,7 @@ $(function(){
 
 $('.vertical .progress-fill span').each(function(){
   var percent = $(this).html();
-  var pTop = 93 - parseFloat(Math.round(( percent.slice(0, percent.length - 1) ))).toFixed(2) + "%"  ;
+  var pTop = 100 - parseFloat(Math.round(( percent.slice(0, percent.length - 1) ))).toFixed(2) + "%"  ;
   $(this).parent().css({
     'height' : percent,
     'top' : pTop

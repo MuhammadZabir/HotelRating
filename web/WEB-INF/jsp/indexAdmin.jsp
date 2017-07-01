@@ -18,8 +18,8 @@
                 <div class="navbar-header">
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/"><h3>HOME</h3></a></li>
-                    <li><a href="#"><h3>DASHBOARD</h3></a></li>
+                    <li><a href="/HotelRating/indexAdmin"><h3>DASHBOARD</h3></a></li>
+                    <li><a href="/HotelRating/hotelList"><h3>LIST HOTEL</h3></a></li>
                     <li><a href="/HotelRating/hotel"><h3>ADD HOTEL</h3></a></li>
                     <li><a href="/HotelRating/logout"><h3>LOG OUT</h3></a></li>
                 </ul>
@@ -37,13 +37,16 @@
                             <c:forEach items = "${objects}" var = "object">
                                 <div class="progress-bar">
                                     <div class="progress-track">
-                                      <span style = "color:red">${object.locationName}</span>
+                                      
                                       <div class="progress-fill">
                                         <span><fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/>%</span><br/> 
                                       </div>
                                     </div>
+                                      <span style = "color:red">${object.locationName}</span>
                                   </div>
+                                  
                             </c:forEach> 
+                            <div class="col-md-10"><br></div>
                         </div>
                     </div>
                 </div>  

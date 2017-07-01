@@ -1,28 +1,41 @@
-<%@ page import="com.hotelrating.util.UserLocationEnum" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@page import = "com.hotelrating.model.CountLocation"%>
+<%@page import = "java.util.List"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.hotelrating.util.UserLocationEnum" %>
 <%@ page import="com.hotelrating.model.Hotel" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html;">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Admin Page</title>
         <link rel="stylesheet" href="/HotelRating/css/bootstrap.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/HotelRating/js/bootstrap.min.js"></script>
-        <title>Rating</title>
+        <script src="/HotelRating/js/bootstrap.min.js"></script>  
     </head>
     <body>
-        <%
+        
+          <%
             Hotel hotel = (Hotel) request.getAttribute("hotel") ;
             request.getSession().setAttribute("hotel", hotel) ;
         %>
+        
+        
         <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                    </div>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/HotelRating/login"><h3>HOME</h3></a></li>
-                        <li><a href="/HotelRating/logout"><h3>LOGOUT</h3></a></li>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/HotelRating/indexAdmin"><h3>DASHBOARD</h3></a></li>
+                    <li><a href="/HotelRating/hotelList"><h3>LIST HOTEL</h3></a></li>
+                    <li><a href="/HotelRating/hotel"><h3>ADD HOTEL</h3></a></li>
+                    <li><a href="/HotelRating/logout"><h3>LOG OUT</h3></a></li>
+                </ul>
+            </div>
+            
+        </nav>
+       
                     </ul>
                 </div>
         </nav>
@@ -87,53 +100,29 @@
                                             
                                         </tbody>
     </table>
-            
-            <div class = "container-fluid">
-                <div class = "row">
-                    <div class = "col-md-4">
-                    </div>
-                    <div class = "col-md-4">
-                        <div class="panel panel-success">
-                           <div class="panel-heading text-center"><h3>Rating</h3></div>
-                           
-                                <center>
-                                    <div class="panel-body">Rating rate:
-                                        <br/>
-                                        <br/>
-                                        
-                                        <div class = "form-check form-check-inline">
-                                            <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="1"/>1 star
-                                            </label>
-                                            <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="2"/>2 star
-                                            </label>
-                                            <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="3"/>3 star
-                                            </label>
-                                            <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="4"/>4 star
-                                            </label>
-                                            <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="5"/>5 star
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">Rating comment:
-                                        <br/>
-                                        <br/>
-                                        <form:textarea class="form-control" rows="3" path = "ratingComment" placeholder = "Please place your comment here" />
-                                    </div>
-                                    <div class="panel-body"><input class="btn btn-success" type="submit" value="Submit" name="submit" />
-                                    </div>
-                                </center>
-                                    
-                                  
-                                    
-                        </div>
-                    </div>
+                                                    
+            <div class="jumbotron">
+                <div class="container-fluid">
+
+                    <table table-bordered >
+                        <tr>
+                            <td> <h2>Reviews</h2></td>
+                            <td> <h2>User Type</h2></td>
+                            <td> <h2>Ranking</h2></td>
+                        </tr>
+                         <tr>
+                             <td><div class="col-md-4"><div id="chart"></div></div></td>
+                            <td class="col-md-4"><canvas id="pie" width="650" height="350"></canvas></td>
+                            <td class="col-md-4"><h1>#30</h1></td> 
+                        </tr>
+
+
+                    </table>
+
+
                 </div>
             </div>
-        </form:form>
     </body>
 </html>
+<link rel="stylesheet" href="/HotelRating/css/chart.css" type="text/css">
+<script src="/HotelRating/js/chart.js"></script>

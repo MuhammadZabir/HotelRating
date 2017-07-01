@@ -16,10 +16,10 @@
                 <div class="navbar-header">
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><h3>HOME</h3></a></li>
-                    <li><a href="#"><h3>DASHBOARD</h3></a></li>
-                    <li><a href="#"><h3>ADD HOTEL</h3></a></li>
-                    <li><a href="#"><h3>LOG OUT</h3></a></li>
+                    <li><a href="/HotelRating/indexAdmin"><h3>DASHBOARD</h3></a></li>
+                    <li><a href="#"><h3>LIST HOTEL</h3></a></li>
+                    <li><a href="/HotelRating/hotel"><h3>ADD HOTEL</h3></a></li>
+                    <li><a href="/HotelRating/logout"><h3>LOG OUT</h3></a></li>
                 </ul>
             </div>
         </nav>
