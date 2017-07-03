@@ -21,6 +21,10 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                     </div>
+                    <ul class="nav navbar-nav">
+                            <li><a class="glyphicon glyphicon-send"></a></li>
+                            <li><a class="navbar-brand"> ZubirTravels</a></li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/HotelRating/">BACK</a></li>
                     </ul>
