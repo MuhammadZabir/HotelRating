@@ -54,7 +54,7 @@
                                 <div class = "table-responsive pre-scrollable">
                                     <table class="table table-striped table-hover">
                                         <thead class = "thead-inverse">
-                                            <tr class="info">
+                                            <tr class="success">
                                                 <th></th>
                                                 <th>Hotel Name</th>
                                                 <th>Hotel Owner</th>

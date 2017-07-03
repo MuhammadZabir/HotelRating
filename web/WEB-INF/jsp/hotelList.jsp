@@ -6,21 +6,6 @@
         <link rel="stylesheet" href="/HotelRating/css/bootstrap.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/HotelRating/js/bootstrap.min.js"></script>
-        <style>
-            html,
-            body,
-            .fullImage{
-                height: 100%;
-            }
-            
-            .fullImage{
-                background: url('http://www.mrwallpaper.com/wallpapers/airplane-flight-sunset-1920x1080.jpg') ;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                background-size: cover;
-            }
-        </style>  
         <title>Welcome</title>
     </head>
     <body>
@@ -72,7 +57,7 @@
                                     <div class = "table-responsive pre-scrollable">
                                         <table class="table table-striped table-hover">
                                             <thead class = "thead-inverse">
-                                                <tr class="info">
+                                                <tr class="success">
                                                     <th></th>
                                                     <th>Hotel Name</th>
                                                     <th>Hotel Owner</th>

@@ -19,7 +19,7 @@
             Hotel hotel = (Hotel) request.getAttribute("hotel") ;
             request.getSession().setAttribute("hotel", hotel) ;
         %>
-        <div class="container-fluid">
+        <div class="container-fluid bek">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -108,12 +108,12 @@
                 </div>
             </div>
 
-            <div class="jumbotron">
-                <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="panel col-md-12">
                     <table table-bordered >
                         <tr>
-                            <td> <h2>Reviews</h2></td>
-                            <td> <h2>User Type</h2></td>
+                            <td><br><h2>Reviews</h2></td>
+                            <td><br><h2>User Type</h2></td>
                         </tr>
                         <tr>
                             <c:forEach items = "${ratingCount}" var = "count">

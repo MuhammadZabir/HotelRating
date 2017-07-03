@@ -13,7 +13,7 @@
         <script src="/HotelRating/js/bootstrap.min.js"></script>  
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container-fluid bek">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -27,12 +27,10 @@
                 </div>
 
             </nav>
-            <center class="container-fluid">
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
+            <div class="col-md-1"></div>
+            <center class="container-fluid panel panel-danger col-md-10">
                         <div class="container-fluid vertical rounded">
-                            <h2>Customers Statistic</h2>
+                            <h2><br>Customers Statistic</h2>
                             <c:forEach items = "${objects}" var = "object">
                                 <div class="progress-bar">
                                     <div class="progress-track">
@@ -44,9 +42,7 @@
                                   </div>
                             </c:forEach>
                             <div class="col-md-10"><br></div>
-                        </div>
-                    </div>
-                </div>  
+                        </div>  
             </center>
         </div>
     </body>

@@ -39,7 +39,7 @@
                     <div class = "col-md-4">
                         <br><br>
 
-                        <div class="panel panel-primary">
+                        <div class="panel panel-success">
                             <div class="panel-heading">LOG IN</div>
                             <div class="panel-body">
                                 <form:input path = "userName" type="text" class="form-control" id="user_email" placeholder="Email Address"/>                
