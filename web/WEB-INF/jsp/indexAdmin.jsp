@@ -13,54 +13,41 @@
         <script src="/HotelRating/js/bootstrap.min.js"></script>  
     </head>
     <body>
-        <style>
-            html,
-            body,
-            .fullImage{
-                height: 100%;
-            }
-            
-            .fullImage{
-                background: url('/HotelRating/Images/bg.jpg');
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                background-size: cover;
-            }
-        </style>  
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/HotelRating/"><h3>DASHBOARD</h3></a></li>
-                    <li><a href="/HotelRating/hotelList/1"><h3>LIST HOTEL</h3></a></li>
-                    <li><a href="/HotelRating/hotel"><h3>ADD HOTEL</h3></a></li>
-                    <li><a href="/HotelRating/logout"><h3>LOG OUT</h3></a></li>
-                </ul>
-            </div>
-            
-        </nav>
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div class="container vertical rounded">
-                        <h2>Percentage Customers Per State</h2>
-                        <c:forEach items = "${objects}" var = "object">
-                            <div class="progress-bar">
-                                <div class="progress-track">
-                                  <div class="progress-fill">
-                                    <span><fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/>%</span><br/> 
-                                  </div>
-                                </div>
-                                    <span style = "color:gray">${object.locationName} <br/>(<fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/> %)</span>
-                              </div>
-                        </c:forEach> 
-                        <div class="col-md-10"><br></div>
+        <div class="container-fluid">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
                     </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/HotelRating/">DASHBOARD</a></li>
+                        <li><a href="/HotelRating/hotelList/1">LIST HOTEL</a></li>
+                        <li><a href="/HotelRating/hotel">ADD HOTEL</a></li>
+                        <li><a href="/HotelRating/logout">LOG OUT</a></li>
+                    </ul>
                 </div>
-            </div>  
+
+            </nav>
+            <center class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="container-fluid vertical rounded">
+                            <h2>Customers Statistic</h2>
+                            <c:forEach items = "${objects}" var = "object">
+                                <div class="progress-bar">
+                                    <div class="progress-track">
+                                      <div class="progress-fill">
+                                        <span><fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/>%</span><br/> 
+                                      </div>
+                                    </div>
+                                        <span style = "color:gray">${object.locationName} <br/>(<fmt:formatNumber type="number" maxFractionDigits="2" value = "${(object.locationCount / total) * 100}"/> %)</span>
+                                  </div>
+                            </c:forEach>
+                            <div class="col-md-10"><br></div>
+                        </div>
+                    </div>
+                </div>  
+            </center>
         </div>
     </body>
 </html>

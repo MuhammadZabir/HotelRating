@@ -45,10 +45,10 @@
                                 <div class="navbar-header">
                                 </div>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="/HotelRating/"><h3>DASHBOARD</h3></a></li>
-                                        <li><a href="/HotelRating/hotelList/1"><h3>LIST HOTEL</h3></a></li>
-                                        <li><a href="/HotelRating/hotel"><h3>ADD HOTEL</h3></a></li>
-                                        <li><a href="/HotelRating/logout"><h3>LOG OUT</h3></a></li>
+                                        <li><a href="/HotelRating/">DASHBOARD</a></li>
+                                        <li><a href="/HotelRating/hotelList/1">LIST HOTEL</a></li>
+                                        <li><a href="/HotelRating/hotel">ADD HOTEL</a></li>
+                                        <li><a href="/HotelRating/logout">LOG OUT</a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -57,7 +57,7 @@
                     <div class="hidden-xs hidden-md hidden-lg"><br></div>
                     <div class="row">
                         <div class = "col-md-2"></div>
-                        <div class = "col-md-6"><input type="text" id = "searchValue" name="searchValue" value="" size="30" class="form-control"></div>
+                        <div class = "col-md-6"><input type="text" id = "searchValue" name="searchValue" value="" class="form-control"></div>
                         <div class = "col-md-2"><a onclick = "this.href='/HotelRating/search/' + document.getElementById('searchValue').value + '&1'" class = "btn btn-success">Search</a></div>
                         <div class = "col-md-2"></div>
                     </div>
@@ -68,63 +68,66 @@
                         <div class = "col-md-2"></div>
                         <div class = "col-md-8">
                             <c:if test = "${!empty hotels}">
-                                <div class = "table-responsive pre-scrollable">
-                                    <table class="table table-striped table-hover">
-                                        <thead class = "thead-inverse">
-                                            <tr class="info">
-                                                <th></th>
-                                                <th>Hotel Name</th>
-                                                <th>Hotel Owner</th>
-                                                <th>Hotel Location</th>
-                                                <th>Hotel Star</th>
-                                                <th>Hotel Description</th>
-                                                <th>Hotel Rating</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items = "${hotels}" var = "hotel">
-                                                <tr bgcolor="#ffffff">
-                                                    <%
-                                                        Hotel hotel = (Hotel) pageContext.getAttribute("hotel") ;
-                                                        if (hotel.getHotelMainImage() != null)
-                                                        {
-                                                    %>
-                                                            <td>
-                                                                <img src="<c:url value='${hotel.hotelMainImage}'/>" class = "img-thumbnail img-responsive" width = "200"/>
-                                                            </td>
-                                                    <%
-                                                        }
-                                                        else
-                                                        {
-                                                    %>
-                                                            <td><span>No Display</span></td>
-                                                    <%
-                                                        }
-                                                    %>
-                                                    <td>${hotel.hotelName}</td>
-                                                    <td>${hotel.hotelOwner}</td>
-                                                    <%
-                                                        for (UserLocationEnum userLocation : UserLocationEnum.values())
-                                                        {
-                                                            if (hotel.getHotelLocation().equals(String.valueOf(userLocation.getValue())))
-                                                            {
-                                                    %>
-                                                                <td><%=userLocation.getName()%></td>
-                                                    <%
-                                                            }
-                                                        }
-                                                    %>
-                                                    <td>${hotel.hotelStar}</td>
-                                                    <td>${hotel.hotelDescription}</td>
-                                                    <td>${hotel.hotelRatingOverall}</td>
-                                                    <td><a class = "btn" href="/HotelRating/hotelDash/${hotel.hotelId}">Overall</a></td>
+                                <div class = "panel">
+                                    <div class = "table-responsive pre-scrollable">
+                                        <table class="table table-striped table-hover">
+                                            <thead class = "thead-inverse">
+                                                <tr class="info">
+                                                    <th></th>
+                                                    <th>Hotel Name</th>
+                                                    <th>Hotel Owner</th>
+                                                    <th>Hotel Location</th>
+                                                    <th>Hotel Star</th>
+                                                    <th>Hotel Description</th>
+                                                    <th>Hotel Rating</th>
+                                                    <th></th>
                                                 </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items = "${hotels}" var = "hotel">
+                                                    <tr bgcolor="#ffffff">
+                                                        <%
+                                                            Hotel hotel = (Hotel) pageContext.getAttribute("hotel") ;
+                                                            if (hotel.getHotelMainImage() != null)
+                                                            {
+                                                        %>
+                                                                <td>
+                                                                    <img src="<c:url value='${hotel.hotelMainImage}'/>" class = "img-thumbnail img-responsive" width = "200"/>
+                                                                </td>
+                                                        <%
+                                                            }
+                                                            else
+                                                            {
+                                                        %>
+                                                                <td><span>No Display</span></td>
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <td>${hotel.hotelName}</td>
+                                                        <td>${hotel.hotelOwner}</td>
+                                                        <%
+                                                            for (UserLocationEnum userLocation : UserLocationEnum.values())
+                                                            {
+                                                                if (hotel.getHotelLocation().equals(String.valueOf(userLocation.getValue())))
+                                                                {
+                                                        %>
+                                                                    <td><%=userLocation.getName()%></td>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
+                                                        <td>${hotel.hotelStar}</td>
+                                                        <td>${hotel.hotelDescription}</td>
+                                                        <td>${hotel.hotelRatingOverall}</td>
+                                                        <td><a class = "btn" href="/HotelRating/hotelDash/${hotel.hotelId}">Overall</a></td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <ul class="pagination pagination-sm">
+                                    <li class="disabled"><a href="#">&laquo;</a></li>
                                     <%
                                         for (int x = 1 ; x <= paging ; x++)
                                         {
@@ -160,6 +163,7 @@
                                             }
                                         }
                                     %>
+                                    <li class="disabled"><a href="#">&raquo;</a></li>
                                 </ul>
                             </c:if>
                         </div>

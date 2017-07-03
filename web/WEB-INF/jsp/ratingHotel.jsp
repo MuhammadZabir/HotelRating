@@ -17,116 +17,126 @@
             Hotel hotel = (Hotel) request.getAttribute("hotel") ;
             request.getSession().setAttribute("hotel", hotel) ;
         %>
-        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
                     </div>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/HotelRating/"><h3>HOME</h3></a></li>
-                        <li><a href="/HotelRating/logout"><h3>LOGOUT</h3></a></li>
+                        <li><a href="/HotelRating/">HOME</a></li>
+                        <li><a href="/HotelRating/logout">LOGOUT</a></li>
                     </ul>
                 </div>
-        </nav>
-        
-        
-        <form:form action="/HotelRating/rating/add" method = "post" modelAttribute="rating">
-            <form:hidden path = "ratingId"/>
-            
-              
-                                    <table class="table table-striped table-hover">
-                                        <thead class = "thead-inverse">
-                                            <tr class="info">
-                                                <th></th>
-                                                <th>Hotel Name</th>
-                                                <th>Hotel Owner</th>
-                                                <th>Hotel Location</th>
-                                                <th>Hotel Star</th>
-                                                <th>Hotel Description</th>
-                                                <th>Hotel Rating</th>
-                                              
-                                            </tr>
-                                        </thead>
+            </nav>
 
-             <tbody>
-                                            
-                                                <tr bgcolor="#ffffff">
-                                                    <%
-                                                     
-                                                        if (hotel.getHotelMainImage() != null)
-                                                        {
-                                                    %>
-                                                            <td>
-                                                                <img src="<c:url value='${hotel.hotelMainImage}'/>" class = "img-thumbnail img-responsive" width = "200"/>
-                                                            </td>
-                                                    <%
-                                                        }
-                                                        else
-                                                        {
-                                                    %>
-                                                            <td><span>No Display</span></td>
-                                                    <%
-                                                        }
-                                                    %>
-                                                    <td>${hotel.hotelName}</td>
-                                                    <td>${hotel.hotelOwner}</td>
-                                                    <%
-                                                        for (UserLocationEnum userLocation : UserLocationEnum.values())
-                                                        {
-                                                            if (hotel.getHotelLocation().equals(String.valueOf(userLocation.getValue())))
-                                                            {
-                                                    %>
-                                                                <td><%=userLocation.getName()%></td>
-                                                    <%
-                                                            }
-                                                        }
-                                                    %>
-                                                    <td>${hotel.hotelStar}</td>
-                                                    <td>${hotel.hotelDescription}</td>
-                                                    <td>${hotel.hotelRatingOverall}</td>
-                                                  
-                                                </tr>
-                                            
-                                        </tbody>
-        </table>
-        <table>
-            <tr>
-                <c:if test = "${images != null}">
-                    <c:forEach items = "${images}" var = "image">
-                        <td>
-                            <img src = "<c:url value = '${image}'/>" class = "img-thumbnail img-responsive" width = "200"/>
-                        </td>
-                    </c:forEach>
-                </c:if>
-            </tr>
-        </table>
-            <div class = "container-fluid">
-                <div class = "row">
-                    <div class = "col-md-4">
+
+            <form:form action="/HotelRating/rating/add" method = "post" modelAttribute="rating">
+                <form:hidden path = "ratingId"/>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel panel-primary text-center">
+                        <div class="panel-heading text-center"><h4>${hotel.hotelName}</h4></div>
+                        <div class="panel-body text-center">
+                        <%
+
+                            if (hotel.getHotelMainImage() != null)
+                            {
+                        %>
+                                <p>
+                                    <img src="<c:url value='${hotel.hotelMainImage}'/>" class = "img-thumbnail img-responsive" width = "200"/>
+                                </p>
+                        <%
+                            }
+                            else
+                            {
+                        %>
+                                <p><span>No Display</span></p>
+                        <%
+                            }
+                        %>
+                        <table>
+                            <tr>
+                                <c:if test = "${images != null}">
+                                    <c:forEach items = "${images}" var = "image">
+                                        <td>
+                                            <img src = "<c:url value = '${image}'/>" class = "img-thumbnail img-responsive" width = "200"/>
+                                        </td>
+                                    </c:forEach>
+                                </c:if>
+                            </tr>
+                        </table>
+                        </div>
                     </div>
-                    <div class = "col-md-4">
-                        <div class="panel panel-success">
-                           <div class="panel-heading text-center"><h3>Rating</h3></div>
-                           
+                </div>
+                <br>
+                <div class="col-md-2"></div>
+                <div class="col-md-7">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading text-center"><h4>Hotel Details</h4></div>
+                        <div class="panel-body">
+                            <label class="col-md-4">Hotel Name</label>
+                            <div class="col-md-8">${hotel.hotelName}</div>
+                        </div>
+                        <div class="panel-body">
+                            <label class="col-md-4">Hotel Owner</label>
+                            <div class="col-md-8">${hotel.hotelOwner}</div>
+                        </div>
+                        <div class="panel-body">
+                            <label class="col-md-4">Hotel Location</label>
+                            <%
+                                for (UserLocationEnum userLocation : UserLocationEnum.values())
+                                {
+                                    if (hotel.getHotelLocation().equals(String.valueOf(userLocation.getValue())))
+                                    {
+                            %>
+                                        <div class="col-md-8"><%=userLocation.getName()%></div>
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+                        <div class="panel-body">
+                            <label class="col-md-4">Hotel Star</label>
+                            <div class="col-md-8">${hotel.hotelStar}</div>
+                        </div>
+                        <div class="panel-body">    
+                            <label class="col-md-4">Hotel Description</label>
+                            <div class="col-md-8">${hotel.hotelDescription}</div>
+                        </div>
+                        <div class="panel-body">    
+                            <label class="col-md-4">Hotel Rating</label>
+                            <div class="col-md-8">${hotel.hotelRatingOverall}</div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class = "container-fluid">
+                    <div class = "row">
+                        <div class = "col-md-4">
+                        </div>
+                        <div class = "col-md-5">
+                            <div class="panel panel-success">
+                                <div class="panel-heading"><h4>Rate us!</h4></div>
                                 <center>
                                     <div class="panel-body">Rating rate:
                                         <br/>
                                         <br/>
-                                        
+
                                         <div class = "form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="1"/>1 star
+                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="1"/>1 - Worst
                                             </label>
                                             <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="2"/>2 star
+                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="2"/>2 - Bad
                                             </label>
                                             <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="3"/>3 star
+                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="3"/>3 - Average
                                             </label>
                                             <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="4"/>4 star
+                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="4"/>4 - Good
                                             </label>
                                             <label class="form-check-label">
-                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="5"/>5 star
+                                                <form:radiobutton class = "form-check-input" path = "ratingRate" value="5"/>5 - Best
                                             </label>
                                         </div>
                                     </div>
@@ -138,13 +148,11 @@
                                     <div class="panel-body"><input class="btn btn-success" type="submit" value="Submit" name="submit" />
                                     </div>
                                 </center>
-                                    
-                                  
-                                    
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form:form>
+            </form:form>
+        </div>
     </body>
 </html>
