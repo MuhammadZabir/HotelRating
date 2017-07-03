@@ -176,7 +176,7 @@ public class IndexController
         if (user.getUserRole() == UserRoleEnum.User.getValue())
             model.setViewName("index") ;
         else
-            model.setViewName("indexAdmin") ;
+            model.setViewName("hotelList") ;
         return model ;
     }
     
